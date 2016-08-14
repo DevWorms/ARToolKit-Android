@@ -3,13 +3,16 @@ apply plugin: 'com.android.model.application'
 model {
     android {
         compileSdkVersion = 23
-        buildToolsVersion = "23.0.2"
+        buildToolsVersion = "23.0.3"
 
         defaultConfig.with {
             applicationId = "org.artoolkit.ar.samples.ARSimpleNativeCars"
             minSdkVersion.apiLevel = 15
             targetSdkVersion.apiLevel = 22
             versionCode = 1
+
+            multiDexEnabled = true
+
             //Integer type incremented by 1 for every release, major or minor, to Google store
             versionName = "1.0.2" //Real fully qualified major and minor release description
 
@@ -27,6 +30,9 @@ model {
                 moduleName = "ARSimpleNativeCars"
             }
         }
+
+        sourceCompatibility = 1.7
+        targetCompatibility = 1.7
     }
 
     android.buildTypes {
@@ -52,10 +58,7 @@ model {
         }
     }
 
-    android.compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_7
-        targetCompatibility JavaVersion.VERSION_1_7
-    }
+
 }
 
 dependencies {

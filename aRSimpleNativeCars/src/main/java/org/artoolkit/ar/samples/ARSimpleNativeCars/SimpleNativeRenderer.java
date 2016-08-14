@@ -106,7 +106,7 @@ public class SimpleNativeRenderer extends ARRenderer {
     public void draw(GL10 gl) {
         SimpleNativeRenderer.demoDrawFrame();
 
-        if (counter.frame()) Log.i("demo", counter.toString());
+        //if (counter.frame()) Log.i("demo", counter.toString());
 
     }
 
