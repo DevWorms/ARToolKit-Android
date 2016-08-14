@@ -1,5 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="hello">Hello World, ARSimpleNativeCarsActivity!</string>
-    <string name="app_name">ARSimpleNativeCars</string>
+    <string name="hello">Hello World, PepsicoRally!</string>
+    <string name="app_name">PepsicoRally</string>
+
+    <string-array name="daimler_tipo_array">
+        <item>Área 1</item>
+        <item>Área 2</item>
+        <item>Área 3</item>
+        <item>Área 4</item>
+    </string-array>
 </resources>
