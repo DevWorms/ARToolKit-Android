@@ -8,9 +8,21 @@
 #  
 #  ==========================================================================
 
-newmtl PEPSILINDRO
+newmtl AZUL
+Kd 0.015686 0.349020 0.807843
+Ks 1.000000 1.000000 1.000000
+illum 2
+Ns 50.781250
+
+newmtl PEPSILINDRO_ETIQUETA
 Kd 0.800000 0.800000 0.800000
 Ks 1.000000 1.000000 1.000000
 illum 2
 Ns 50.781250
-map_Kd PEPSILINDRO TEXTURA.jpg
+map_Kd PEPSILINDRO ETIQUETA.jpg
+
+newmtl GRIS_CLARO
+Kd 0.776699 0.776699 0.776699
+Ks 1.000000 1.000000 1.000000
+illum 2
+Ns 50.781250
