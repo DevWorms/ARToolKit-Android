@@ -23,9 +23,9 @@ public class agendaActivity extends Activity {
         Log.d("RestApi","D"+((Button)view).getId());
         Intent newScreen = new Intent(agendaActivity.this, menuActActivity.class);
 
-        if(((Button)view).getId()== Integer.parseInt("2131558509")){
+        if(((Button)view).getId()== Integer.parseInt("2131558512")){
             newScreen.putExtra("dia","dia1");
-        }else if (((Button)view).getId()== Integer.parseInt("2131558510")){
+        }else if (((Button)view).getId()== Integer.parseInt("2131558513")){
             newScreen.putExtra("dia","dia2");
         }else{
             newScreen.putExtra("dia","dia3");

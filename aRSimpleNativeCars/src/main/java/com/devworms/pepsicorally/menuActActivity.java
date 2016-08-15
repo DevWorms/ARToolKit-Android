@@ -38,11 +38,11 @@ public class menuActActivity extends Activity {
         TextView fechaCTV = (TextView)findViewById(R.id.fechaCompleta);
 
         if(dia.equals("dia1"))
-            fechaCompuesta = "Lunes 25 de Agosto 2016";
+            fechaCompuesta = "Lunes 25 de Agosto";
         else if(dia.equals("dia2"))
-            fechaCompuesta = "Martes 25 de Agosto 2016";
+            fechaCompuesta = "Martes 25 de Agosto";
         else if(dia.equals("dia3"))
-            fechaCompuesta = "Miercoles 27 de Agosto 2016";
+            fechaCompuesta = "Miercoles 27 de Agosto";
 
         fechaCTV.setText(fechaCompuesta);
 
