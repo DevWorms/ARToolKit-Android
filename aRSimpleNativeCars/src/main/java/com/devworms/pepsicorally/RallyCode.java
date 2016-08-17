@@ -10,7 +10,9 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.Toast;
+
 import org.artoolkit.ar.samples.ARSimpleNativeCars.R;
 
 import java.io.IOException;
@@ -29,6 +31,8 @@ public class RallyCode extends Activity {
     private String botonStr;
     private EditText editTextCode;
 
+    private LinearLayout relativeLayout;
+
     //  Preferencias
     SharedPreferences misPrefs;
 
@@ -41,6 +45,29 @@ public class RallyCode extends Activity {
         editTextCode = (EditText)findViewById(R.id.editTextCode);
 
         misPrefs = getSharedPreferences("MisPreferencias", Context.MODE_PRIVATE);
+
+
+        relativeLayout = (LinearLayout) findViewById(R.id.rl);
+
+        if ( botonStr.equals("1") ) {
+            relativeLayout.setBackgroundResource(R.drawable.pista_1);
+        } else if( botonStr.equals("2") ){
+            relativeLayout.setBackgroundResource(R.drawable.pista_2);
+        } else if( botonStr.equals("3") ){
+            relativeLayout.setBackgroundResource(R.drawable.pista_3);
+        } else if( botonStr.equals("4") ){
+            relativeLayout.setBackgroundResource(R.drawable.pista_4);
+        } else if( botonStr.equals("5") ){
+            relativeLayout.setBackgroundResource(R.drawable.pista_5);
+        } else if( botonStr.equals("6") ){
+            relativeLayout.setBackgroundResource(R.drawable.pista_6);
+        } else if( botonStr.equals("7") ){
+            relativeLayout.setBackgroundResource(R.drawable.pista_7);
+        } else if( botonStr.equals("8") ){
+            relativeLayout.setBackgroundResource(R.drawable.pista_8);
+        } else if( botonStr.equals("9") ){
+            relativeLayout.setBackgroundResource(R.drawable.pista_9);
+        }
     }
 
     public void verificarCode(View v){

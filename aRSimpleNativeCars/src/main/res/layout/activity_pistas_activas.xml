@@ -3,15 +3,15 @@
     android:id="@+id/activity_pistas_activas"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/fondo" >
+    android:background="@drawable/fondo_pistas" >
 
     <Button
-        android:text="AR"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="32dp"
         android:id="@+id/button4"
-        android:onClick="aRToolKit" />
+        android:onClick="aRToolKit"
+        android:background="@drawable/boton_camara" />
 </RelativeLayout>

@@ -65,9 +65,11 @@ dependencies {
     //compile 'com.android.support:support-v4:23.0.1'
     //compile 'com.android.support:appcompat-v7:23.0.1' //Only required when the target device API level is greater than
     compile project(':aRBaseLib')
+
     compile 'com.squareup.okhttp3:okhttp:3.2.0'
     compile 'com.android.support:design:24.1.1'
     compile 'com.android.support:appcompat-v7:24.1.1'
     compile 'com.android.support.constraint:constraint-layout:1.0.0-alpha1'
+}
 
-}                                                       //the compile and target of the app being deployed to the device
+//the compile and target of the app being deployed to the device

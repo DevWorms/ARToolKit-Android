@@ -37,7 +37,7 @@ public class Rally extends Activity {
         reload();
     }
 
-    public void rallyCode(String botonStr){
+    public void code(String botonStr){
         Intent i = new Intent(this, RallyCode.class);
         i.putExtra("boton", botonStr);
         //para que te regrese de la actividad RallyCode
@@ -45,39 +45,39 @@ public class Rally extends Activity {
     }
 
     public void pistaUno(View v){
-        rallyCode("1");
+        code("1");
     }
 
     public void pistaDos(View v){
-        rallyCode("2");
+        code("2");
     }
 
     public void pistaTres(View v){
-        rallyCode("3");
+        code("3");
     }
 
     public void pistaCuatro(View v){
-        rallyCode("4");
+        code("4");
     }
 
     public void pistaCinco(View v){
-        rallyCode("5");
+        code("5");
     }
 
     public void pistaSeis(View v){
-        rallyCode("6");
+        code("6");
     }
 
     public void pistaSiete(View v){
-        rallyCode("7");
+        code("7");
     }
 
     public void pistaOcho(View v){
-        rallyCode("8");
+        code("8");
     }
 
     public void pistaNueve(View v){
-        rallyCode("9");
+        code("9");
     }
 
     public void reload() {
@@ -90,6 +90,60 @@ public class Rally extends Activity {
         btn7.setEnabled(misPrefs.getBoolean("7", true));
         btn8.setEnabled(misPrefs.getBoolean("8", true));
         btn9.setEnabled(misPrefs.getBoolean("9", true));
+
+        if( misPrefs.getBoolean("1", true) ){
+            btn1.setBackgroundResource(R.drawable.btn1);
+        } else{
+            btn1.setBackgroundResource(R.drawable.btn1b);
+        }
+
+        if( misPrefs.getBoolean("2", true) ){
+            btn2.setBackgroundResource(R.drawable.btn2);
+        } else{
+            btn2.setBackgroundResource(R.drawable.btn2b);
+        }
+
+        if( misPrefs.getBoolean("3", true) ){
+            btn3.setBackgroundResource(R.drawable.btn3);
+        } else{
+            btn3.setBackgroundResource(R.drawable.btn3b);
+        }
+
+        if( misPrefs.getBoolean("4", true) ){
+            btn4.setBackgroundResource(R.drawable.btn4);
+        } else{
+            btn4.setBackgroundResource(R.drawable.btn4b);
+        }
+
+        if( misPrefs.getBoolean("5", true) ){
+            btn5.setBackgroundResource(R.drawable.btn5);
+        } else{
+            btn5.setBackgroundResource(R.drawable.btn5b);
+        }
+
+        if( misPrefs.getBoolean("6", true) ){
+            btn6.setBackgroundResource(R.drawable.btn6);
+        } else{
+            btn6.setBackgroundResource(R.drawable.btn6b);
+        }
+
+        if( misPrefs.getBoolean("7", true) ){
+            btn7.setBackgroundResource(R.drawable.btn7);
+        } else{
+            btn7.setBackgroundResource(R.drawable.btn7b);
+        }
+
+        if( misPrefs.getBoolean("8", true) ){
+            btn8.setBackgroundResource(R.drawable.btn8);
+        } else{
+            btn8.setBackgroundResource(R.drawable.btn8b);
+        }
+
+        if( misPrefs.getBoolean("9", true) ){
+            btn9.setBackgroundResource(R.drawable.btn9);
+        } else{
+            btn9.setBackgroundResource(R.drawable.btn9b);
+        }
     }
 
     //para que te regrese de la actividad RallyCode

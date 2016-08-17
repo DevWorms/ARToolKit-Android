@@ -24,52 +24,35 @@
         android:smallScreens="true"
         android:xlargeScreens="true" />
 
-
-
     <application
-        android:name="org.artoolkit.ar.samples.ARSimpleNativeCars.ARSimpleNativeCarsApplication"
+        android:name=".ARSimpleNativeCarsApplication"
+        android:allowBackup="true"
         android:icon="@drawable/icon"
         android:label="@string/app_name"
-        android:launchMode="singleTask"
-        android:allowBackup="true"
-        android:theme="@style/AppTheme"
         android:largeHeap="true"
+        android:launchMode="singleTask"
         android:supportsRtl="true"
-        >
-
+        android:theme="@style/AppTheme">
         <activity
-            android:name="org.artoolkit.ar.samples.ARSimpleNativeCars.ARSimpleNativeCarsActivity"
+            android:name=".ARSimpleNativeCarsActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
-            android:label="@string/app_name">
-        </activity>
-
-        <activity
-            android:name="org.artoolkit.ar.base.camera.CameraPreferencesActivity" />
+            android:label="@string/app_name"></activity>
+        <activity android:name="org.artoolkit.ar.base.camera.CameraPreferencesActivity" />
 
         <!-- BEGIN - PEPSICO -->
 
-        <activity
-            android:name="com.devworms.pepsicorally.agendaActivity" />
-        <activity
-            android:name="com.devworms.pepsicorally.agendaDetalleActivity" />
-        <activity
-            android:name="com.devworms.pepsicorally.LoginActivity" />
-        <activity
-            android:name="com.devworms.pepsicorally.MainActivity"/>
-        <activity
-            android:name="com.devworms.pepsicorally.menuActActivity" />
-        <activity
-            android:name="com.devworms.pepsicorally.MenuPepsico" />
-        <activity
-            android:name="com.devworms.pepsicorally.PistasActivas" />
-        <activity
-            android:name="com.devworms.pepsicorally.Rally" />
-        <activity
-            android:name="com.devworms.pepsicorally.RallyCode"/>
-        <activity
-            android:name="com.devworms.pepsicorally.RegistroExito" />
-        <activity
-            android:name="com.devworms.pepsicorally.SplashInicioActivity">
+        <activity android:name="com.devworms.pepsicorally.agendaActivity" />
+        <activity android:name="com.devworms.pepsicorally.agendaDetalleActivity" />
+        <activity android:name="com.devworms.pepsicorally.LoginActivity" />
+        <activity android:name="com.devworms.pepsicorally.MainActivity" />
+        <activity android:name="com.devworms.pepsicorally.menuActActivity" />
+        <activity android:name="com.devworms.pepsicorally.MenuPepsico" />
+        <activity android:name="com.devworms.pepsicorally.PistasActivas" />
+        <activity android:name="com.devworms.pepsicorally.Rally" />
+        <activity android:name="com.devworms.pepsicorally.RallyCode" />
+        <activity android:name="com.devworms.pepsicorally.RegistroExito" />
+        <activity android:name="com.devworms.pepsicorally.PreguntasActivity"/>
+        <activity android:name="com.devworms.pepsicorally.SplashInicioActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -79,6 +62,6 @@
 
         <!-- END - PEPSICO -->
 
-
     </application>
+
 </manifest>
