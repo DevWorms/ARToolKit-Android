@@ -38,7 +38,7 @@ public class Rally extends Activity {
     }
 
     public void code(String botonStr){
-        Intent i = new Intent(this, RallyCode.class);
+        Intent i = new Intent(this, PreguntasActivity.class);
         i.putExtra("boton", botonStr);
         //para que te regrese de la actividad RallyCode
         startActivityForResult(i, MI_RESULT);
