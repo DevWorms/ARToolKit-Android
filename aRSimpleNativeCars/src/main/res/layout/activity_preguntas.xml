@@ -1,18 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/activity_preguntas"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.devworms.pepsicorally.PreguntasActivity">
+    android:orientation="vertical">
 
-    <Button
-        android:text="Button"
-        android:layout_width="wrap_content"
+    <TextView
+        android:text="No hay información por el momento"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        tools:layout_editor_absoluteY="343dp"
-        tools:layout_editor_absoluteX="138dp"
-        android:id="@+id/button6"
-        android:onClick="rallyCode" />
-</android.support.design.widget.CoordinatorLayout>
+        android:id="@+id/textPregunta"
+        android:layout_marginTop="40dp"
+        android:textSize="36sp"
+        android:textStyle="normal|bold"
+        android:textAlignment="center"
+        android:textColor="#ec7f30"
+        android:layout_marginBottom="60dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp" />
+
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/list"
+        android:textAlignment="center"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp" />
+
+
+</LinearLayout>

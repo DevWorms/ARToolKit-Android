@@ -104,11 +104,4 @@ public class menuActActivity extends Activity {
         }
 
     }
-
-    public void cumbreScreen(View view){
-        Intent newScreen = new Intent(menuActActivity.this, agendaActivity.class);
-
-        startActivity(newScreen);
-    }
-
 }

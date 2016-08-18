@@ -68,6 +68,22 @@ public class RallyCode extends Activity {
         } else if( botonStr.equals("9") ){
             relativeLayout.setBackgroundResource(R.drawable.pista_9);
         }
+
+        //---- TODO
+
+        else if( botonStr.equals("10") ){
+            relativeLayout.setBackgroundResource(R.drawable.pista_9);
+        } else if( botonStr.equals("11") ){
+            relativeLayout.setBackgroundResource(R.drawable.pista_9);
+        } else if( botonStr.equals("12") ){
+            relativeLayout.setBackgroundResource(R.drawable.pista_9);
+        } else if( botonStr.equals("13") ){
+            relativeLayout.setBackgroundResource(R.drawable.pista_9);
+        } else if( botonStr.equals("14") ){
+            relativeLayout.setBackgroundResource(R.drawable.pista_9);
+        } else if( botonStr.equals("15") ){
+            relativeLayout.setBackgroundResource(R.drawable.pista_9);
+        }
     }
 
     public void verificarCode(View v){
@@ -82,7 +98,13 @@ public class RallyCode extends Activity {
                 (botonStr.equals("6") && editTextCode.getText().toString().equals("camara6")) ||
                 (botonStr.equals("7") && editTextCode.getText().toString().equals("camara7")) ||
                 (botonStr.equals("8") && editTextCode.getText().toString().equals("camara8")) ||
-                (botonStr.equals("9") && editTextCode.getText().toString().equals("camara9")) ) {
+                (botonStr.equals("9") && editTextCode.getText().toString().equals("camara9")) ||
+                (botonStr.equals("10") && editTextCode.getText().toString().equals("camara")) ||
+                (botonStr.equals("11") && editTextCode.getText().toString().equals("camara")) ||
+                (botonStr.equals("12") && editTextCode.getText().toString().equals("camara")) ||
+                (botonStr.equals("13") && editTextCode.getText().toString().equals("camara")) ||
+                (botonStr.equals("14") && editTextCode.getText().toString().equals("camara")) ||
+                (botonStr.equals("15") && editTextCode.getText().toString().equals("camara")) ) {
             new PostCode().execute();
         } else {
             Toast toast = Toast.makeText(getApplicationContext(), "Código incorrecto", Toast.LENGTH_SHORT);

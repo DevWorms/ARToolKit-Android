@@ -8,14 +8,14 @@ import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.EditText;
-import android.widget.Spinner;
 import android.widget.Toast;
+
 import org.artoolkit.ar.samples.ARSimpleNativeCars.R;
 
 import java.io.IOException;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
@@ -24,7 +24,7 @@ import okhttp3.RequestBody;
 import okhttp3.Response;
 
 
-public class MainActivity extends Activity implements AdapterView.OnItemSelectedListener  {
+public class MainActivity extends Activity {
 
     // Progress Dialog
     private ProgressDialog pDialog;
@@ -37,11 +37,11 @@ public class MainActivity extends Activity implements AdapterView.OnItemSelected
     EditText contrasena;
     EditText repiteContrasena;
 
-    Spinner tipo;
-
     //  Preferencias
     SharedPreferences misPrefs;
 
+    private static final String PATTERN_EMAIL = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
+            + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,23 +53,10 @@ public class MainActivity extends Activity implements AdapterView.OnItemSelected
         paterno = (EditText)findViewById(R.id.apellidoPText);
         materno = (EditText)findViewById(R.id.apellidoMText);
         mail = (EditText)findViewById(R.id.mailText);
-        tipo = (Spinner) findViewById(R.id.tipoSpinner);
         contrasena = (EditText)findViewById(R.id.passText);
         repiteContrasena = (EditText)findViewById(R.id.cnfPassText);
 
         misPrefs = getSharedPreferences("MisPreferencias", Context.MODE_PRIVATE);
-
-        //  SPINNER TIPO
-            Spinner spinnerArea = (Spinner) findViewById(R.id.tipoSpinner);
-
-            ArrayAdapter<CharSequence> adapterTipo = ArrayAdapter.createFromResource(this,
-                    R.array.daimler_tipo_array, android.R.layout.simple_spinner_item);
-
-            adapterTipo.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-            spinnerArea.setAdapter(adapterTipo);
-
-            spinnerArea.setOnItemSelectedListener(this);
-
     }
 
     public void moduloRegistro (View view){
@@ -77,60 +64,49 @@ public class MainActivity extends Activity implements AdapterView.OnItemSelected
         String rePass = repiteContrasena.getText().toString();
         String email = mail.getText().toString();
         String nombreString = nombre.getText().toString();
+        String patString = paterno.getText().toString();
+        String matString = materno.getText().toString();
 
         if(pass.trim().length() == 0 || rePass.trim().length() == 0 ||
-                email.trim().length() == 0 || nombreString.trim().length() == 0) {
+                email.trim().length() == 0 || nombreString.trim().length() == 0 ||
+                patString.trim().length() == 0 || matString.trim().length() == 0) {
             Toast toast = Toast.makeText(getApplicationContext(), "Faltan campos", Toast.LENGTH_SHORT);
             toast.show();
-        }
+        } else {
+            if( validateEmail(email) ){
+                if (pass.equals(rePass)) {
+                    new LoadAlbums().execute();
+                } else {
+                    Context context = getApplicationContext();
+                    CharSequence text = "Las contraseñas no coinciden";
+                    int duration = Toast.LENGTH_SHORT;
 
-        else {
-
-            if (pass.equals(rePass)) {
-                new LoadAlbums().execute();
+                    Toast toast = Toast.makeText(context, text, duration);
+                    toast.show();
+                }
             } else {
-
-                Context context = getApplicationContext();
-                CharSequence text = "Las contraseñas no coinciden";
-                int duration = Toast.LENGTH_SHORT;
-
-                Toast toast = Toast.makeText(context, text, duration);
+                Toast toast = Toast.makeText(getApplicationContext(), "Correo inválido", Toast.LENGTH_SHORT);
                 toast.show();
             }
         }
-
     }
 
+    public static boolean validateEmail(String email) {
 
-    @Override
-    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+        // Compiles the given regular expression into a pattern.
+        Pattern pattern = Pattern.compile(PATTERN_EMAIL);
 
-        /*
-            if(position == 0)    {
-                puesto.setEnabled(true);
-                empresa.setEnabled(true);
-            }
-            else {
-                puesto.setEnabled(false);
-                empresa.setEnabled(false);
-            }
-        */
+        // Match the given input against this pattern
+        Matcher matcher = pattern.matcher(email);
+        return matcher.matches();
     }
 
-    @Override
-    public void onNothingSelected(AdapterView<?> parent) {
-
-    }
-
-
-    class LoadAlbums extends AsyncTask<String, String, String> {
-
+   class LoadAlbums extends AsyncTask<String, String, String> {
 
         String nombreStr = nombre.getText().toString();
         String patStr = paterno.getText().toString();
         String matStr = materno.getText().toString();
         String mailStr = mail.getText().toString();
-        String tipoStr = tipo.getSelectedItem().toString();
         String passStr = contrasena.getText().toString();
 
         /**
@@ -155,7 +131,7 @@ public class MainActivity extends Activity implements AdapterView.OnItemSelected
 
             MediaType mediaType = MediaType.parse("application/x-www-form-urlencoded");
             RequestBody body = RequestBody.create(mediaType, "nombre=" + nombreStr + "&paterno=" + patStr + "&materno=" + matStr +
-                    "&correo=" + mailStr + "&area=" + tipoStr + "&passw=" + passStr);
+                    "&correo=" + mailStr + "&passw=" + passStr);
             Request request = new Request.Builder()
                     .url("http://app-pepsico.palindromo.com.mx/APP/registro.php")
                     .post(body)

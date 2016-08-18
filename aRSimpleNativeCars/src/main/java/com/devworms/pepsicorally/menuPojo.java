@@ -56,10 +56,6 @@ public class menuPojo {
         return recomendaciones;
     }
 
-    public void setRecomendaciones(String recomendaciones) {
-        this.recomendaciones = recomendaciones;
-    }
-
     public String getFecha() {
         return fecha;
     }

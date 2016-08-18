@@ -56,6 +56,8 @@
 // Utility preprocessor directive so only one change needed if Java class name changes
 #define JNIFUNCTION_DEMO(sig) Java_org_artoolkit_ar_samples_ARSimpleNativeCars_SimpleNativeRenderer_##sig
 
+void crear_obj(const char *file, const char *marker, int nummodel, float scale); //mi funcion
+
 extern "C" {
     JNIEXPORT void JNICALL JNIFUNCTION_DEMO(demoInitialise(JNIEnv * env, jobject object)) ;
     JNIEXPORT void JNICALL JNIFUNCTION_DEMO(demoShutdown(JNIEnv * env, jobject object)) ;
@@ -80,57 +82,44 @@ static float lightPosition[4] = {0.0f, 0.0f, 1.0f, 0.0f};
 
 JNIEXPORT void JNICALL JNIFUNCTION_DEMO(demoInitialise(JNIEnv * env, jobject object)) {
 
-    const char *model0file = "Data/models/PEPSILINDRO/PEPSILINDRO.obj";
-    const char *model1file = "Data/models/PAPAS/PAPAS.obj";
-    const char *model2file = "Data/models/TAZO/TAZO.obj";
+    crear_obj("Data/models/PEPSILINDRO/PEPSILINDRO CODIGO_2004.obj", "single;Data/hiro.patt;80", 0, 0.09f);
+    //crear_obj("Data/models/PEPSILINDRO/PEPSILINDRO CODIGO_3582.obj", "single;Data/hiro.patt;80", 1, 0.09f);
+    //crear_obj("Data/models/PEPSILINDRO/PEPSILINDRO CODIGO_6853.obj", "single;Data/hiro.patt;80", 2, 0.09f);
+    //crear_obj("Data/models/PEPSILINDRO/PEPSILINDRO CODIGO_7354.obj", "single;Data/hiro.patt;80", 3, 0.09f);
+    //crear_obj("Data/models/PEPSILINDRO/PEPSILINDRO CODIGO_9365.obj", "single;Data/hiro.patt;80", 4, 0.09f);
 
-    models[0].patternID = arwAddMarker("single;Data/hiro.patt;80");
-    arwSetMarkerOptionBool(models[0].patternID, ARW_MARKER_OPTION_SQUARE_USE_CONT_POSE_ESTIMATION, false);
-    arwSetMarkerOptionBool(models[0].patternID, ARW_MARKER_OPTION_FILTERED, true);
+    crear_obj("Data/models/PAPAS/PAPAS_CODIGO_1946.obj", "single;Data/kanji.patt;80", 2, 0.09f);
+    //crear_obj("Data/models/PAPAS/PAPAS_CODIGO_2549.obj", "single;Data/hiro.patt;80", 6, 0.09f);
+    //crear_obj("Data/models/PAPAS/PAPAS_CODIGO_4025.obj", "single;Data/hiro.patt;80", 7, 0.09f);
+    //crear_obj("Data/models/PAPAS/PAPAS_CODIGO_4193.obj", "single;Data/hiro.patt;80", 8, 0.09f);
+    //crear_obj("Data/models/PAPAS/PAPAS_CODIGO_6290.obj", "single;Data/hiro.patt;80", 9, 0.09f);
 
-    models[0].obj = glmReadOBJ2(model0file, 0, 0); // context 0, don't read textures yet.
+    crear_obj("Data/models/TAZO/TAZO_CODIGO_3912.obj", "single;Data/marker17.pat;80", 1, 0.09f);
+    //crear_obj("Data/models/TAZO/TAZO_CODIGO_5194.obj", "single;Data/hiro.patt;80", 11, 0.09f);
+    //crear_obj("Data/models/TAZO/TAZO_CODIGO_6432.obj", "single;Data/hiro.patt;80", 12, 0.09f);
+    //crear_obj("Data/models/TAZO/TAZO_CODIGO_7430.obj", "single;Data/hiro.patt;80", 13, 0.09f);
+    //crear_obj("Data/models/TAZO/TAZO_CODIGO_9228.obj", "single;Data/hiro.patt;80", 14, 0.09f);
+}
 
-    if (!models[0].obj) {
-        LOGE("Error loading model from file '%s'.", model0file);
+void crear_obj(const char *file, const char *marker, int nummodel, float scale) {
+
+    models[ nummodel ].patternID = arwAddMarker( marker );
+    arwSetMarkerOptionBool(models[ nummodel ].patternID, ARW_MARKER_OPTION_SQUARE_USE_CONT_POSE_ESTIMATION, false);
+    arwSetMarkerOptionBool(models[ nummodel ].patternID, ARW_MARKER_OPTION_FILTERED, true);
+
+    models[ nummodel ].obj = glmReadOBJ2( file , 0, 0); // context 0, don't read textures yet.
+
+    if (!models[ nummodel ].obj) {
+        LOGE("Error loading model from file '%s'.", file );
         exit(-1);
     }
 
-    glmScale(models[0].obj, 0.09f);
+    glmScale(models[ nummodel ].obj, scale );
     //glmRotate(models[0].obj, 3.14159f / 2.0f, 1.0f, 0.0f, 0.0f);
-    glmCreateArrays(models[0].obj, GLM_SMOOTH | GLM_MATERIAL | GLM_TEXTURE);
-    models[0].visible = false;
+    glmCreateArrays(models[ nummodel ].obj, GLM_SMOOTH | GLM_MATERIAL | GLM_TEXTURE);
+    models[ nummodel ].visible = false;
 
-    models[1].patternID = arwAddMarker("single;Data/kanji.patt;80");
-    arwSetMarkerOptionBool(models[1].patternID, ARW_MARKER_OPTION_SQUARE_USE_CONT_POSE_ESTIMATION, false);
-    arwSetMarkerOptionBool(models[1].patternID, ARW_MARKER_OPTION_FILTERED, true);
-
-    models[1].obj = glmReadOBJ2(model1file, 0, 0); // context 0, don't read textures yet.
-
-    if (!models[1].obj) {
-        LOGE("Error loading model from file '%s'.", model1file);
-        exit(-1);
-    }
-
-    glmScale(models[1].obj, 0.09f);
-    //glmRotate(models[1].obj, 3.14159f / 2.0f, 1.0f, 0.0f, 0.0f);
-    glmCreateArrays(models[1].obj, GLM_SMOOTH | GLM_MATERIAL | GLM_TEXTURE);
-    models[1].visible = false;
-
-    models[2].patternID = arwAddMarker("single;Data/circle.patt;80");
-    arwSetMarkerOptionBool(models[2].patternID, ARW_MARKER_OPTION_SQUARE_USE_CONT_POSE_ESTIMATION, false);
-    arwSetMarkerOptionBool(models[2].patternID, ARW_MARKER_OPTION_FILTERED, true);
-
-    models[2].obj = glmReadOBJ2(model2file, 0, 0); // context 0, don't read textures yet.
-
-    if (!models[2].obj) {
-        LOGE("Error loading model from file '%s'.", model2file);
-        exit(-1);
-    }
-
-    glmScale(models[2].obj, 0.09f);
-    //glmRotate(models[2].obj, 3.14159f / 2.0f, 1.0f, 0.0f, 0.0f);
-    glmCreateArrays(models[2].obj, GLM_SMOOTH | GLM_MATERIAL | GLM_TEXTURE);
-    models[2].visible = false;
+	return;
 }
 
 JNIEXPORT void JNICALL JNIFUNCTION_DEMO(demoShutdown(JNIEnv * env, jobject object)) {
