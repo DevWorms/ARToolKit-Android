@@ -1,41 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:fitsSystemWindows="true">
-
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:gravity="center_horizontal"
-    android:background="@drawable/fondo"
-    >
+    android:background="@drawable/fondo">
 
     <Button
-        android:layout_marginTop="100dp"
-        android:layout_width="250dp"
-        android:layout_height="81dp"
+        android:layout_width="36sp"
+        android:layout_height="36sp"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginStart="10dp"
+        android:id="@+id/button6"
+        android:background="@drawable/boton_info" />
+
+    <Button
+        android:layout_marginTop="90dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:id="@+id/button2"
         android:textSize="18sp"
         android:background="@drawable/boton_trofeos"
-        android:onClick="Rally"/>
+        android:onClick="Rally"
+        android:layout_gravity="center"/>
 
     <Button
-        android:layout_width="250dp"
-        android:layout_height="81dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginTop="25dp"
         android:id="@+id/button3"
         android:background="@drawable/boton_agenda"
-        android:onClick="Agenda"/>
+        android:onClick="Agenda"
+        android:layout_gravity="center"/>
 
     <Button
-        android:layout_width="250dp"
-        android:layout_height="81dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:id="@+id/button"
         android:background="@drawable/boton_pistas"
         android:layout_marginTop="25dp"
-        android:onClick="PistasActivas" />
+        android:onClick="PistasActivas"
+        android:layout_gravity="center"/>
 
 </LinearLayout>
-</android.support.design.widget.CoordinatorLayout>
