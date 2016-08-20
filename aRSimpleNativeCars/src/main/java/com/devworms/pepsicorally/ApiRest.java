@@ -92,8 +92,39 @@ public class ApiRest {
                 Log.d("RestApi","respuesta "+sensorApi.getString("r3"));
                 strings[4] = sensorApi.getString("r3");
 
-                Log.d("RestApi","respuesta "+sensorApi.getString("ip"));
-                strings[5] = sensorApi.getString("ip");
+                Log.d("RestApi","respuesta "+sensorApi.getString("respuesta_android"));
+                strings[5] = sensorApi.getString("respuesta_android");
+            }
+        }
+        catch (Exception ex){
+            Log.d("RestApi","no hay nada por el mometo");
+        }
+
+        return strings;
+    }
+
+    public static String consultarPista() {
+
+        String strings = "";
+
+        try {
+            Log.d("RestApi","respuesta  consulta");
+
+            Request request = new Request.Builder()
+                    .url("http://app-pepsico.palindromo.com.mx/APP/pistas.php")
+                    .get()
+                    .build();
+
+            JSONArray values = new RequestApi().execute(request).get();
+            Log.d("RestApi","respuesta "+ values.length());
+
+            if( values.length() > 0 ) {
+
+                JSONObject sensorApi = values.getJSONObject(0);
+
+                Log.d("RestApi","respuesta "+sensorApi.getString("img"));
+                strings = sensorApi.getString("img");
+
             }
         }
         catch (Exception ex){

@@ -67,22 +67,18 @@ public class RallyCode extends Activity {
             relativeLayout.setBackgroundResource(R.drawable.pista_8);
         } else if( botonStr.equals("9") ){
             relativeLayout.setBackgroundResource(R.drawable.pista_9);
-        }
-
-        //---- TODO
-
-        else if( botonStr.equals("10") ){
-            relativeLayout.setBackgroundResource(R.drawable.pista_9);
+        } else if( botonStr.equals("10") ){
+            relativeLayout.setBackgroundResource(R.drawable.pista_10);
         } else if( botonStr.equals("11") ){
-            relativeLayout.setBackgroundResource(R.drawable.pista_9);
+            relativeLayout.setBackgroundResource(R.drawable.pista_11);
         } else if( botonStr.equals("12") ){
-            relativeLayout.setBackgroundResource(R.drawable.pista_9);
-        } else if( botonStr.equals("13") ){
-            relativeLayout.setBackgroundResource(R.drawable.pista_9);
+            relativeLayout.setBackgroundResource(R.drawable.pista_12);
+        }  else if( botonStr.equals("13") ){
+            relativeLayout.setBackgroundResource(R.drawable.pista_13);
         } else if( botonStr.equals("14") ){
-            relativeLayout.setBackgroundResource(R.drawable.pista_9);
+            relativeLayout.setBackgroundResource(R.drawable.pista_14);
         } else if( botonStr.equals("15") ){
-            relativeLayout.setBackgroundResource(R.drawable.pista_9);
+            relativeLayout.setBackgroundResource(R.drawable.pista_15);
         }
     }
 
@@ -90,21 +86,21 @@ public class RallyCode extends Activity {
 
         Log.i("boton ",botonStr);
 
-        if (    (botonStr.equals("1") && editTextCode.getText().toString().equals("camara")) ||
-                (botonStr.equals("2") && editTextCode.getText().toString().equals("camara2")) ||
-                (botonStr.equals("3") && editTextCode.getText().toString().equals("camara3")) ||
-                (botonStr.equals("4") && editTextCode.getText().toString().equals("camara4")) ||
-                (botonStr.equals("5") && editTextCode.getText().toString().equals("camara5")) ||
-                (botonStr.equals("6") && editTextCode.getText().toString().equals("camara6")) ||
-                (botonStr.equals("7") && editTextCode.getText().toString().equals("camara7")) ||
-                (botonStr.equals("8") && editTextCode.getText().toString().equals("camara8")) ||
-                (botonStr.equals("9") && editTextCode.getText().toString().equals("camara9")) ||
-                (botonStr.equals("10") && editTextCode.getText().toString().equals("camara")) ||
-                (botonStr.equals("11") && editTextCode.getText().toString().equals("camara")) ||
-                (botonStr.equals("12") && editTextCode.getText().toString().equals("camara")) ||
-                (botonStr.equals("13") && editTextCode.getText().toString().equals("camara")) ||
-                (botonStr.equals("14") && editTextCode.getText().toString().equals("camara")) ||
-                (botonStr.equals("15") && editTextCode.getText().toString().equals("camara")) ) {
+        if (    (botonStr.equals("1") && editTextCode.getText().toString().equals("1946")) ||
+                (botonStr.equals("2") && editTextCode.getText().toString().equals("6290")) ||
+                (botonStr.equals("3") && editTextCode.getText().toString().equals("4193")) ||
+                (botonStr.equals("4") && editTextCode.getText().toString().equals("4025")) ||
+                (botonStr.equals("5") && editTextCode.getText().toString().equals("2549")) ||
+                (botonStr.equals("6") && editTextCode.getText().toString().equals("3582")) ||
+                (botonStr.equals("7") && editTextCode.getText().toString().equals("6853")) ||
+                (botonStr.equals("8") && editTextCode.getText().toString().equals("2004")) ||
+                (botonStr.equals("9") && editTextCode.getText().toString().equals("3912")) ||
+                (botonStr.equals("10") && editTextCode.getText().toString().equals("7430")) ||
+                (botonStr.equals("11") && editTextCode.getText().toString().equals("9365")) ||
+                (botonStr.equals("12") && editTextCode.getText().toString().equals("6432")) ||
+                (botonStr.equals("13") && editTextCode.getText().toString().equals("9228")) ||
+                (botonStr.equals("14") && editTextCode.getText().toString().equals("7354")) ||
+                (botonStr.equals("15") && editTextCode.getText().toString().equals("5194")) ) {
             new PostCode().execute();
         } else {
             Toast toast = Toast.makeText(getApplicationContext(), "Código incorrecto", Toast.LENGTH_SHORT);

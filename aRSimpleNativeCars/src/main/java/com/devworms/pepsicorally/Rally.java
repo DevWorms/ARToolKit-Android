@@ -182,39 +182,39 @@ public class Rally extends Activity {
         }
 
         if( misPrefs.getBoolean("10", true) ){
-            btn10.setBackgroundResource(R.drawable.btn1b);
+            btn10.setBackgroundResource(R.drawable.btn10b);
         } else{
-            btn10.setBackgroundResource(R.drawable.btn1);
+            btn10.setBackgroundResource(R.drawable.btn10);
         }
 
         if( misPrefs.getBoolean("11", true) ){
-            btn11.setBackgroundResource(R.drawable.btn1b);
+            btn11.setBackgroundResource(R.drawable.btn11b);
         } else{
-            btn11.setBackgroundResource(R.drawable.btn1);
+            btn11.setBackgroundResource(R.drawable.btn11);
         }
 
         if( misPrefs.getBoolean("12", true) ){
-            btn12.setBackgroundResource(R.drawable.btn1b);
+            btn12.setBackgroundResource(R.drawable.btn12b);
         } else{
-            btn12.setBackgroundResource(R.drawable.btn1);
+            btn12.setBackgroundResource(R.drawable.btn12);
         }
 
         if( misPrefs.getBoolean("13", true) ){
-            btn13.setBackgroundResource(R.drawable.btn1b);
+            btn13.setBackgroundResource(R.drawable.btn13b);
         } else{
-            btn13.setBackgroundResource(R.drawable.btn1);
+            btn13.setBackgroundResource(R.drawable.btn13);
         }
 
         if( misPrefs.getBoolean("14", true) ){
-            btn14.setBackgroundResource(R.drawable.btn1b);
+            btn14.setBackgroundResource(R.drawable.btn14b);
         } else{
-            btn14.setBackgroundResource(R.drawable.btn1);
+            btn14.setBackgroundResource(R.drawable.btn14);
         }
 
         if( misPrefs.getBoolean("15", true) ){
-            btn15.setBackgroundResource(R.drawable.btn1b);
+            btn15.setBackgroundResource(R.drawable.btn15b);
         } else{
-            btn15.setBackgroundResource(R.drawable.btn1);
+            btn15.setBackgroundResource(R.drawable.btn15);
         }
     }
 
