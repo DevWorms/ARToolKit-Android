@@ -2,7 +2,8 @@
 <resources>
     <string name="hello">Hello World, PepsicoRally!</string>
     <string name="app_name">PepsicoRally</string>
-
+    <string name="push_title">Recordatorio</string>
+    <string name="google_cloud_messaging_package">org.artoolkit.ar.samples.ARSimpleNativeCars</string>
     <string-array name="daimler_tipo_array">
         <item>Área 1</item>
         <item>Área 2</item>

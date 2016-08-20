@@ -2,7 +2,7 @@ apply plugin: 'com.android.model.application'
 
 model {
     android {
-        compileSdkVersion = 24
+        compileSdkVersion = 23
         buildToolsVersion = "23.0.3"
 
         defaultConfig.with {
@@ -67,9 +67,14 @@ dependencies {
     compile project(':aRBaseLib')
 
     compile 'com.squareup.okhttp3:okhttp:3.2.0'
-    compile 'com.android.support:design:24.1.1'
-    compile 'com.android.support:appcompat-v7:24.1.1'
+    compile 'com.android.support:support-v4:23.1.0'
+    compile 'com.android.support:appcompat-v7:23.3.0'
     compile 'com.android.support.constraint:constraint-layout:1.0.0-alpha1'
+
+    compile('com.amazonaws:aws-android-sdk-core:2.2.18')
+    compile('com.amazonaws:aws-android-sdk-cognito:2.2.18')
+    compile('com.amazonaws:aws-android-sdk-sns:2.2.18')
+    compile 'com.google.android.gms:play-services-gcm:7.8.0'
 }
 
 //the compile and target of the app being deployed to the device
