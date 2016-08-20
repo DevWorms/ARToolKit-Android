@@ -12,7 +12,13 @@
             <option value="$PROJECT_DIR$/aRSimpleNativeCars" />
           </set>
         </option>
-        <option name="resolveModulePerSourceSet" value="false" />
+        <option name="myModules">
+          <set>
+            <option value="$PROJECT_DIR$" />
+            <option value="$PROJECT_DIR$/aRBaseLib" />
+            <option value="$PROJECT_DIR$/aRSimpleNativeCars" />
+          </set>
+        </option>
       </GradleProjectSettings>
     </option>
   </component>
