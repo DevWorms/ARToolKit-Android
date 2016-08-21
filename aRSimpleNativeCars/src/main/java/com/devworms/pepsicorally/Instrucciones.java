@@ -74,6 +74,10 @@ public class Instrucciones extends Activity {
 
                     "contestada la pregunta, ingresa tu código y listo! Ya habrás recolectado la primera pista.");
             txtConclu.setText("");
+        }else{
+            Intent i = new Intent(this, MenuPepsico.class);
+            startActivity(i);
+            finish();
         }
 
     }
