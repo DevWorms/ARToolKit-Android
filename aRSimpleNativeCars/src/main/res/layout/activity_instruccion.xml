@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:background="@drawable/fondo">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="INSTRUCCIONES"
+            android:textAlignment="center"
+            android:id="@+id/textView6"
+            android:layout_marginTop="39dp"
+            android:textSize="30sp"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:textColor="#ec7f30"
+            android:layout_marginBottom="20dp" />
+
+        <ScrollView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/scrollView3" >
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Bienvenido a la aplicación de HR meeting."
+                    android:id="@+id/txtIntro"
+                    android:textSize="20sp"
+                    android:textColor="#ec7f30"
+                    android:layout_below="@+id/textView6"
+                    android:layout_alignParentLeft="false"
+                    android:layout_alignParentStart="false"
+                    android:layout_centerHorizontal="true" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Aquí podrás encontrar información que te será de utilidad a lo largo de este evento. "
+                    android:id="@+id/txtConte"
+                    android:layout_below="@+id/textView5"
+                    android:layout_centerHorizontal="true"
+                    android:textSize="20dp"
+                    android:textColor="#ec7f30" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Puedes revisar el itinerario de actividades que tenemos preparado para ti en la  sección de “Agenda”"
+                    android:id="@+id/txtConclusion"
+
+                    android:layout_centerHorizontal="true"
+                    android:textSize="20dp"
+                    android:textColor="#ec7f30" />
+            </LinearLayout>
+        </ScrollView>
+
+    </LinearLayout>
+
+    <Button
+        android:layout_width="150dp"
+        android:layout_height="80dp"
+        android:id="@+id/btnContunuar"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:background="@drawable/continuar" />
+
+    <Button
+        android:layout_width="140dp"
+        android:layout_height="80dp"
+        android:id="@+id/btnRegresar"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:background="@drawable/botonre"
+        android:layout_alignTop="@+id/btnContunuar"
+        android:visibility="invisible" />
+
+
+</RelativeLayout>

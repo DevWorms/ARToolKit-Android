@@ -31,4 +31,8 @@ public class MenuPepsico extends Activity {
         Intent i = new Intent(this, PistasActivas.class);
         startActivity(i);
     }
+    public void Instrucciones(View v){
+        Intent i = new Intent(this, Instrucciones.class);
+        startActivity(i);
+    }
 }

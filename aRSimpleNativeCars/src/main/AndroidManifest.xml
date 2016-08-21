@@ -51,6 +51,7 @@
         <activity android:name="com.devworms.pepsicorally.MenuPepsico" />
         <activity android:name="com.devworms.pepsicorally.PistasActivas" />
         <activity android:name="com.devworms.pepsicorally.Rally" />
+        <activity android:name="com.devworms.pepsicorally.Instrucciones" />
         <activity android:name="com.devworms.pepsicorally.RallyCode" />
         <activity android:name="com.devworms.pepsicorally.RegistroExito" />
         <activity android:name="com.devworms.pepsicorally.PreguntasActivity"/>

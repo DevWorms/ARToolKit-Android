@@ -12,7 +12,8 @@
         android:layout_marginLeft="10dp"
         android:layout_marginStart="10dp"
         android:id="@+id/button6"
-        android:background="@drawable/boton_info" />
+        android:background="@drawable/boton_info"
+        android:onClick="Instrucciones" />
 
     <Button
         android:layout_marginTop="90dp"
