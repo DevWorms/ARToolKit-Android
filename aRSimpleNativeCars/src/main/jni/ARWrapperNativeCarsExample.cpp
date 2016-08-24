@@ -73,7 +73,7 @@ typedef struct ARModel {
     GLMmodel *obj;
 } ARModel;
 
-#define NUM_MODELS 3
+#define NUM_MODELS 15
 static ARModel models[NUM_MODELS] = {0};
 
 static float lightAmbient[4] = {0.1f, 0.1f, 0.1f, 1.0f};
@@ -82,23 +82,23 @@ static float lightPosition[4] = {0.0f, 0.0f, 1.0f, 0.0f};
 
 JNIEXPORT void JNICALL JNIFUNCTION_DEMO(demoInitialise(JNIEnv * env, jobject object)) {
 
-    crear_obj("Data/models/PEPSILINDRO/PEPSILINDRO CODIGO_2004.obj", "single;Data/hiro.patt;80", 0, 0.09f);
-    //crear_obj("Data/models/PEPSILINDRO/PEPSILINDRO CODIGO_3582.obj", "single;Data/papas_02.pat;80", 1, 0.09f);
-    //crear_obj("Data/models/PEPSILINDRO/PEPSILINDRO CODIGO_6853.obj", "single;Data/papas_03.pat;80", 2, 0.09f);
-    //crear_obj("Data/models/PEPSILINDRO/PEPSILINDRO CODIGO_7354.obj", "single;Data/papas_04.pat;80", 3, 0.09f);
-    //crear_obj("Data/models/PEPSILINDRO/PEPSILINDRO CODIGO_9365.obj", "single;Data/papas_05.pat;80", 4, 0.09f);
+    crear_obj("Data/models/PAPAS/PAPAS_CODIGO_1946.obj", "single;Data/papas_01.pat;80", 0, 0.03f);
+    crear_obj("Data/models/CHEETOS.obj", "single;Data/papas_02.pat;80", 1, 0.03f);
+    crear_obj("Data/models/RUFFLES.obj", "single;Data/papas_03.pat;80", 2, 0.03f);
+    crear_obj("Data/models/MAFER.obj", "single;Data/papas_04.pat;80", 3, 0.03f);
+    crear_obj("Data/models/DORITOS.obj", "single;Data/papas_05.pat;80", 4, 0.03f);
 
-    crear_obj("Data/models/PAPAS/PAPAS_CODIGO_1946.obj", "single;Data/kanji.patt;80", 2, 0.09f);
-    //crear_obj("Data/models/PAPAS/PAPAS_CODIGO_2549.obj", "single;Data/pepcilindros_02.pat;80", 6, 0.09f);
-    //crear_obj("Data/models/PAPAS/PAPAS_CODIGO_4025.obj", "single;Data/pepcilindros_03.pat;80", 7, 0.09f);
-    //crear_obj("Data/models/PAPAS/PAPAS_CODIGO_4193.obj", "single;Data/pepcilindros_04.pat;80", 8, 0.09f);
-    //crear_obj("Data/models/PAPAS/PAPAS_CODIGO_6290.obj", "single;Data/pepcilindros_05.pat;80", 9, 0.09f);
+    crear_obj("Data/models/EMPERADOR.obj", "single;Data/pepcilindros_02.pat;80", 5, 0.03f);
+    crear_obj("Data/models/CHOKIS.obj", "single;Data/pepcilindros_03.pat;80", 6, 0.03f);
+    crear_obj("Data/models/CRACKETS.obj", "single;Data/pepcilindros_04.pat;80", 7, 0.03f);
+    crear_obj("Data/models/GALLETA QUAKER.obj", "single;Data/pepcilindros_05.pat;80", 8, 0.03f);
+    crear_obj("Data/models/KACANG.obj", "single;Data/tazos_01.pat;80", 9, 0.03f);
 
-    crear_obj("Data/models/TAZO/TAZO_CODIGO_3912.obj", "single;Data/marker17.pat;80", 1, 0.09f);
-    //crear_obj("Data/models/TAZO/TAZO_CODIGO_5194.obj", "single;Data/tazos_02.pat;80", 11, 0.09f);
-    //crear_obj("Data/models/TAZO/TAZO_CODIGO_6432.obj", "single;Data/tazos_03.pat;80", 12, 0.09f);
-    //crear_obj("Data/models/TAZO/TAZO_CODIGO_7430.obj", "single;Data/tazos_04.pat;80", 13, 0.09f);
-    //crear_obj("Data/models/TAZO/TAZO_CODIGO_9228.obj", "single;Data/tazos_05.pat;80", 14, 0.09f);
+    crear_obj("Data/models/BOTE AVENA QUAKER.obj", "single;Data/tazos_05.pat;80", 10, 0.03f);
+    crear_obj("Data/models/INSPIREKA.obj", "single;Data/tazos_02.pat;80", 11, 0.03f);
+    crear_obj("Data/models/TAZO/TAZO_CODIGO_9228.obj", "single;Data/tazos_03.pat;80", 12, 0.03f);
+    crear_obj("Data/models/PEPSILINDRO/PEPSILINDRO CODIGO_7354.obj", "single;Data/tazos_04.pat;80", 13, 0.03f);
+    crear_obj("Data/models/SABRITAS RETRO.obj", "single;Data/pepcilindros_01.pat;80", 14, 0.03f);
 }
 
 void crear_obj(const char *file, const char *marker, int nummodel, float scale) {

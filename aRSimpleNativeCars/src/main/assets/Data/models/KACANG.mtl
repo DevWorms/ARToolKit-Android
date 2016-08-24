@@ -1,0 +1,25 @@
+#  ==========================================================================
+#  Wavefront Material file
+#  Exported by Red-i Productions' "Riptide Pro"
+#  (a commercial plugin for Cinema 4D PC & Mac, R9.6 or later)
+#  
+#  Red-i Productions
+#  http://skinprops.com
+#  
+#  ==========================================================================
+
+newmtl BOLSA_KACANG_VUELTA
+Kd 0.800000 0.800000 0.800000
+illum 1
+map_Kd TEXTURA KACANG ATRAS copy.jpg
+
+newmtl BOLSA_KACANG_FRENTE
+Kd 0.800000 0.800000 0.800000
+illum 1
+map_Kd TEXTURA KACANG copy.jpg
+
+newmtl AZUL
+Kd 0.015686 0.349020 0.807843
+Ks 1.000000 1.000000 1.000000
+illum 2
+Ns 50.781250

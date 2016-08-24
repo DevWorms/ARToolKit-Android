@@ -2,12 +2,14 @@ package com.devworms.pepsicorally;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.graphics.drawable.Drawable;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
+import android.os.AsyncTask;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.RelativeLayout;
+import android.widget.Toast;
 
 import org.artoolkit.ar.samples.ARSimpleNativeCars.ARSimpleNativeCarsActivity;
 import org.artoolkit.ar.samples.ARSimpleNativeCars.R;
@@ -19,7 +21,7 @@ public class PistasActivas extends Activity {
 
     String fondoUrl;
     RelativeLayout relativeLayout;
-    ImageView imageButton;
+    Bitmap bitmap;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,29 +31,44 @@ public class PistasActivas extends Activity {
         fondoUrl = ApiRest.consultarPista();
 
         relativeLayout = (RelativeLayout) findViewById(R.id.activity_pistas_activas);
-        imageButton = (ImageView) findViewById(R.id.imageView3);
 
-        if(!fondoUrl.equals("") ){
+        new LoadImage().execute(fondoUrl);
 
-            Drawable fondo = LoadImageFromWebOperations(fondoUrl);
-
-            imageButton.setBackgroundDrawable(fondo);
-        }
-    }
-
-    public static Drawable LoadImageFromWebOperations(String url) {
-        try {
-            InputStream is = (InputStream) new URL(url).getContent();
-            Drawable d = Drawable.createFromStream(is, "src name");
-            return d;
-        } catch (Exception e) {
-            Log.i("paps ","hubo pedo");
-            return null;
-        }
     }
 
     public void aRToolKit(View v){
         Intent intent = new Intent(this, ARSimpleNativeCarsActivity.class);
         startActivity(intent);
     }
+
+    private class LoadImage extends AsyncTask<String, String, Bitmap> {
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+
+        }
+        protected Bitmap doInBackground(String... args) {
+            try {
+                bitmap = BitmapFactory.decodeStream((InputStream)new URL(args[0]).getContent());
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            return bitmap;
+        }
+
+        protected void onPostExecute(Bitmap image) {
+
+            if(image != null){
+                //img.setImageBitmap(image);
+                relativeLayout.setBackgroundDrawable(new BitmapDrawable(getResources(),image));
+            }else{
+
+                Toast.makeText(PistasActivas.this, "Image Does Not exist or Network Error", Toast.LENGTH_SHORT).show();
+
+            }
+        }
+    }
 }
+
+

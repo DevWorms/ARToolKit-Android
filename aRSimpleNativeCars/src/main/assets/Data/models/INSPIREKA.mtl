@@ -1,0 +1,42 @@
+#  ==========================================================================
+#  Wavefront Material file
+#  Exported by Red-i Productions' "Riptide Pro"
+#  (a commercial plugin for Cinema 4D PC & Mac, R9.6 or later)
+#  
+#  Red-i Productions
+#  http://skinprops.com
+#  
+#  ==========================================================================
+
+newmtl AZUL
+Kd 0.015686 0.349020 0.807843
+Ks 1.000000 1.000000 1.000000
+illum 2
+Ns 50.781250
+
+newmtl BLISTER
+Kd 0.864078 0.830059 0.728002
+illum 1
+
+newmtl BISEL_CAJA
+Kd 0.529412 0.066667 0.756863
+illum 1
+
+newmtl INSPIREKA_ARRIBA
+Kd 0.800000 0.800000 0.800000
+illum 1
+map_Kd TEXTURA INSPIREKA ARRIBA copy.jpg
+
+newmtl INSPIREKA_ATRAS
+Kd 0.800000 0.800000 0.800000
+illum 1
+map_Kd TEXTURA INSPIREKA ATRAS copy.jpg
+
+newmtl INSPIREKA_FRENTE
+Kd 0.800000 0.800000 0.800000
+illum 1
+map_Kd TEXTURA INSPIREKA copy.jpg
+
+newmtl INTERIOR_CAJA
+Kd 1.000000 0.984252 0.937008
+illum 1
