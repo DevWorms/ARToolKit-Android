@@ -1,26 +1,32 @@
 package com.devworms.pepsicorally;
 
 import android.app.Activity;
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 import org.artoolkit.ar.samples.ARSimpleNativeCars.R;
 
-/**
- * Created by salva on 21/08/2016.
- */
 public class Instrucciones extends Activity {
     int seccion=1;
     ImageView contenido;
     Button btnRegre,btnConti;
+
+    //  Preferencias
+    SharedPreferences misPrefs;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_instruccion);
-       contenido= (ImageView)findViewById(R.id.imgInstru);
+
+        misPrefs = getSharedPreferences("MisPreferencias", Context.MODE_PRIVATE);
+
+        contenido= (ImageView)findViewById(R.id.imgInstru);
         btnConti=(Button)findViewById(R.id.btnContunuar);
         btnConti.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -58,8 +64,19 @@ public class Instrucciones extends Activity {
         }else if(secciones==5){
             contenido.setImageResource(R.drawable.hojacinco);
         }else{
-            //Intent i = new Intent(this, MenuPepsico.class);
-            //startActivity(i);
+
+            boolean acceso = misPrefs.getBoolean("instrucciones", false); // segundo parametro es el que toma default
+
+            if(!acceso) {
+
+                SharedPreferences.Editor editor = misPrefs.edit();
+                editor.putBoolean("instrucciones", true);
+                editor.commit();
+
+                Intent intent = new Intent(this, MenuPepsico.class);
+                startActivity(intent);
+            }
+
             finish();
         }
 

@@ -10,7 +10,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import org.artoolkit.ar.samples.ARSimpleNativeCars.R;
@@ -31,7 +31,7 @@ public class RallyCode extends Activity {
     private String botonStr;
     private EditText editTextCode;
 
-    private LinearLayout relativeLayout;
+    private RelativeLayout relativeLayout;
 
     //  Preferencias
     SharedPreferences misPrefs;
@@ -47,7 +47,7 @@ public class RallyCode extends Activity {
         misPrefs = getSharedPreferences("MisPreferencias", Context.MODE_PRIVATE);
 
 
-        relativeLayout = (LinearLayout) findViewById(R.id.rl);
+        relativeLayout = (RelativeLayout) findViewById(R.id.rl);
 
         if ( botonStr.equals("1") ) {
             relativeLayout.setBackgroundResource(R.drawable.pista_1);

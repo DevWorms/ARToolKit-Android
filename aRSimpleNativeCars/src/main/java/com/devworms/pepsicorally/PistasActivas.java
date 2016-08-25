@@ -64,7 +64,7 @@ public class PistasActivas extends Activity {
                 relativeLayout.setBackgroundDrawable(new BitmapDrawable(getResources(),image));
             }else{
 
-                Toast.makeText(PistasActivas.this, "Image Does Not exist or Network Error", Toast.LENGTH_SHORT).show();
+                Toast.makeText(PistasActivas.this, "Regresa y vuelve a entrar a esta pantalla para darte las pistas", Toast.LENGTH_SHORT).show();
 
             }
         }

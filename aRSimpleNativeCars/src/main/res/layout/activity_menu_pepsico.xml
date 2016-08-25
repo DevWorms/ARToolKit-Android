@@ -21,8 +21,8 @@
         android:layout_height="wrap_content"
         android:id="@+id/button2"
         android:textSize="18sp"
-        android:background="@drawable/boton_trofeos"
-        android:onClick="Rally"
+        android:background="@drawable/boton_pistas"
+        android:onClick="PistasActivas"
         android:layout_gravity="center"/>
 
     <Button
@@ -30,17 +30,17 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="25dp"
         android:id="@+id/button3"
-        android:background="@drawable/boton_agenda"
-        android:onClick="Agenda"
+        android:background="@drawable/boton_trofeos"
+        android:onClick="Rally"
         android:layout_gravity="center"/>
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/button"
-        android:background="@drawable/boton_pistas"
+        android:background="@drawable/boton_agenda"
         android:layout_marginTop="25dp"
-        android:onClick="PistasActivas"
+        android:onClick="Agenda"
         android:layout_gravity="center"/>
 
 </LinearLayout>

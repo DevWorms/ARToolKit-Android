@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:paddingLeft="@dimen/activity_horizontal_margin"
@@ -9,6 +9,17 @@
     android:id="@+id/rl"
     android:background="@drawable/pista_1"
     android:orientation="vertical">
+
+    <Button
+        android:layout_gravity="center"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/button5"
+        android:onClick="verificarCode"
+        android:background="@drawable/botonnviar"
+        android:layout_marginBottom="20dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true" />
 
     <EditText
         android:layout_gravity="center"
@@ -21,16 +32,9 @@
         android:hint="Código"
         android:textColor="#004d97"
         android:textColorHint="#004d97"
-        android:layout_marginTop="370dp"/>
-
-    <Button
-        android:layout_marginTop="50dp"
-        android:layout_gravity="center"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/button5"
-        android:onClick="verificarCode"
-        android:background="@drawable/botonnviar" />
+        android:layout_marginBottom="54dp"
+        android:layout_above="@+id/button5"
+        android:layout_centerHorizontal="true" />
 
 
-</LinearLayout>
+</RelativeLayout>
