@@ -6,7 +6,7 @@ model {
         buildToolsVersion = "23.0.3"
 
         defaultConfig.with {
-            applicationId = "org.artoolkit.ar.samples.ARSimpleNativeCars"
+            applicationId = "com.devworms.pepsicorally"
             minSdkVersion.apiLevel = 15
             targetSdkVersion.apiLevel = 22
             versionCode = 1

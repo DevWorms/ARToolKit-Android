@@ -13,8 +13,6 @@ import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
-import org.artoolkit.ar.samples.ARSimpleNativeCars.R;
-
 import java.io.IOException;
 
 import okhttp3.MediaType;

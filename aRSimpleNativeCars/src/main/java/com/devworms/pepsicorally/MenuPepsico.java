@@ -5,8 +5,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
-import org.artoolkit.ar.samples.ARSimpleNativeCars.R;
-
 public class MenuPepsico extends Activity {
 
     @Override

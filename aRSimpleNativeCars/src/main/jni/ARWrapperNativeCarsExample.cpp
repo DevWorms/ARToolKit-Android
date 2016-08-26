@@ -54,7 +54,7 @@
 #include <android/log.h>
 
 // Utility preprocessor directive so only one change needed if Java class name changes
-#define JNIFUNCTION_DEMO(sig) Java_org_artoolkit_ar_samples_ARSimpleNativeCars_SimpleNativeRenderer_##sig
+#define JNIFUNCTION_DEMO(sig) Java_com_devworms_pepsicorally_SimpleNativeRenderer_##sig
 
 void crear_obj(const char *file, const char *marker, int nummodel, float scale); //mi funcion
 

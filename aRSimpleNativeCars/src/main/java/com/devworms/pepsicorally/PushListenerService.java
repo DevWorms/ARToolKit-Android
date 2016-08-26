@@ -13,8 +13,6 @@ import android.util.Log;
 
 import com.google.android.gms.gcm.GcmListenerService;
 
-import org.artoolkit.ar.samples.ARSimpleNativeCars.R;
-
 import java.util.List;
 
 /**

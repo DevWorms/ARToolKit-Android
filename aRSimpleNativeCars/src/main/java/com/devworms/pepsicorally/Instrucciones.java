@@ -9,8 +9,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 
-import org.artoolkit.ar.samples.ARSimpleNativeCars.R;
-
 public class Instrucciones extends Activity {
     int seccion=1;
     ImageView contenido;

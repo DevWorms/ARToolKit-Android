@@ -7,8 +7,6 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
-import org.artoolkit.ar.samples.ARSimpleNativeCars.R;
-
 public class agendaActivity extends Activity {
 
         @Override

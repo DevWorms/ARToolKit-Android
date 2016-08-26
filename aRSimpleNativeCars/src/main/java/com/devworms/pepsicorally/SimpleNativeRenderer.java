@@ -1,5 +1,5 @@
 /*
- *  ARSimpleNativeCarsApplication.java
+ *  SimpleNativeRenderer.java
  *  ARToolKit5
  *
  *  Disclaimer: IMPORTANT:  This Daqri software is supplied to you by Daqri
@@ -43,45 +43,70 @@
  *  Copyright 2015 Daqri, LLC.
  *  Copyright 2011-2015 ARToolworks, Inc.
  *
- *  Author(s): Philip Lamb
+ *  Author(s): Julian Looser, Philip Lamb
  *
  */
 
-//
-// This class provides a subclass of Application to enable app-wide behavior.
-// 
+package com.devworms.pepsicorally;
 
-package org.artoolkit.ar.samples.ARSimpleNativeCars;
+import org.artoolkit.ar.base.FPSCounter;
+import org.artoolkit.ar.base.rendering.ARRenderer;
 
-import android.app.Application;
+import javax.microedition.khronos.egl.EGLConfig;
+import javax.microedition.khronos.opengles.GL10;
 
-import org.artoolkit.ar.base.assets.AssetHelper;
+public class SimpleNativeRenderer extends ARRenderer {
 
-public class ARSimpleNativeCarsApplication extends Application {
+    // Load the native libraries.
+    static {
+        System.loadLibrary("c++_shared");
+        System.loadLibrary("ARWrapper");
+        System.loadLibrary("ARWrapperNativeCarsExample");
+    }
 
-    private static Application sInstance;
+    private FPSCounter counter = new FPSCounter();
 
-    // Anywhere in the application where an instance is required, this method
-    // can be used to retrieve it.
-    public static Application getInstance() {
-        return sInstance;
+    public static native void demoInitialise();
+
+    public static native void demoShutdown();
+
+    public static native void demoSurfaceCreated();
+
+    public static native void demoSurfaceChanged(int w, int h);
+
+    public static native void demoDrawFrame();
+
+    /**
+     * By overriding {@link #configureARScene}, the markers and other settings can be configured
+     * after the native library is initialised, but prior to the rendering actually starting.
+     * Note that this does not run on the OpenGL thread. Use onSurfaceCreated/demoSurfaceCreated
+     * to do OpenGL initialisation.
+     */
+    @Override
+    public boolean configureARScene() {
+        SimpleNativeRenderer.demoInitialise();
+        return true;
     }
 
     @Override
-    public void onCreate() {
-        super.onCreate();
-        sInstance = this;
-        ((ARSimpleNativeCarsApplication) sInstance).initializeInstance();
+    public void onSurfaceChanged(GL10 gl, int w, int h) {
+        super.onSurfaceChanged(gl, w, h);
+        SimpleNativeRenderer.demoSurfaceChanged(w, h);
     }
 
-    // Here we do one-off initialisation which should apply to all activities
-    // in the application.
-    protected void initializeInstance() {
-
-        // Unpack assets to cache directory so native library can read them.
-        // N.B.: If contents of assets folder changes, be sure to increment the
-        // versionCode integer in the AndroidManifest.xml file.
-        AssetHelper assetHelper = new AssetHelper(getAssets());
-        assetHelper.cacheAssetFolder(getInstance(), "Data");
+    @Override
+    public void onSurfaceCreated(GL10 gl, EGLConfig config) {
+        super.onSurfaceCreated(gl, config);
+        SimpleNativeRenderer.demoSurfaceCreated();
     }
+
+    @Override
+    public void draw(GL10 gl) {
+        SimpleNativeRenderer.demoDrawFrame();
+
+        //if (counter.frame()) Log.i("demo", counter.toString());
+
+    }
+
 }
+

@@ -10,8 +10,6 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import org.artoolkit.ar.samples.ARSimpleNativeCars.R;
-
 public class PreguntasActivity extends Activity {
 
     private String botonStr;

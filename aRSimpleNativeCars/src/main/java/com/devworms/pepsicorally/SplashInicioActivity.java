@@ -14,8 +14,6 @@ import android.util.Log;
 import com.devworms.pepsicorally.mobile.AWSMobileClient;
 import com.devworms.pepsicorally.mobile.user.IdentityManager;
 
-import org.artoolkit.ar.samples.ARSimpleNativeCars.R;
-
 public class SplashInicioActivity extends Activity {
 
     //  Preferencias

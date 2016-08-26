@@ -47,7 +47,7 @@
  *
  */
 
-package org.artoolkit.ar.samples.ARSimpleNativeCars;
+package com.devworms.pepsicorally;
 
 import android.os.Bundle;
 import android.widget.FrameLayout;

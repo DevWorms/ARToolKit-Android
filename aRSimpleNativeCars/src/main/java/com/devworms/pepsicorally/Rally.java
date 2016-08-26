@@ -8,8 +8,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-import org.artoolkit.ar.samples.ARSimpleNativeCars.R;
-
 public class Rally extends Activity {
 
     //  Preferencias

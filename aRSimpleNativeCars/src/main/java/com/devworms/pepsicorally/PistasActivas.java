@@ -11,9 +11,6 @@ import android.view.View;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
-import org.artoolkit.ar.samples.ARSimpleNativeCars.ARSimpleNativeCarsActivity;
-import org.artoolkit.ar.samples.ARSimpleNativeCars.R;
-
 import java.io.InputStream;
 import java.net.URL;
 

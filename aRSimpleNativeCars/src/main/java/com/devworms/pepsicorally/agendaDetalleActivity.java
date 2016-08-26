@@ -4,8 +4,6 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.widget.TextView;
 
-import org.artoolkit.ar.samples.ARSimpleNativeCars.R;
-
 public class agendaDetalleActivity extends Activity {
 
     String fechaCompuesta;

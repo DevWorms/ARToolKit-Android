@@ -7,8 +7,6 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 
-import org.artoolkit.ar.samples.ARSimpleNativeCars.R;
-
 public class RegistroExito extends Activity {
 
     //  Preferencias
