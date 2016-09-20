@@ -122,32 +122,32 @@ public class LoginActivity extends Activity {
             // dismiss the dialog after getting all albums
 
             String exito = "\"Success\"";
-            String text = null;
+            String text;
 
             pDialog.dismiss();
 
             try {
                 text = response.body().string();
+
+                if(exito.equals(text))  {
+
+                    SharedPreferences.Editor editor = misPrefs.edit();
+                    editor.putString("email", mailStr);
+                    editor.putBoolean("acceso", true);
+                    editor.commit();
+
+                    Intent llamarScreenCodigo = new Intent(LoginActivity.this, MenuPepsico.class);
+                    startActivity(llamarScreenCodigo);
+
+                    finish();
+                } else {
+                    Toast toast = Toast.makeText(getApplicationContext(), text, Toast.LENGTH_SHORT);
+                    toast.show();
+                }
+
             } catch (IOException e) {
                 e.printStackTrace();
             }
-
-            if(exito.equals(text))  {
-
-                SharedPreferences.Editor editor = misPrefs.edit();
-                editor.putString("email", mailStr);
-                editor.putBoolean("acceso", true);
-                editor.commit();
-
-                Intent llamarScreenCodigo = new Intent(LoginActivity.this, MenuPepsico.class);
-                startActivity(llamarScreenCodigo);
-
-                finish();
-            } else {
-                Toast toast = Toast.makeText(getApplicationContext(), text, Toast.LENGTH_SHORT);
-                toast.show();
-            }
-
         }
 
     }

@@ -20,6 +20,7 @@ public class menuActActivity extends Activity {
     List<menuPojo> list = new ArrayList<menuPojo>();
     String fechaCompuesta;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,17 +31,18 @@ public class menuActActivity extends Activity {
 
         // consultar el jason
         String dia = getIntent().getStringExtra("dia");
+
         Log.d("RestApi","respuesta "+dia);
         list = ApiRest.consultarListadoMenu(dia);
 
         TextView fechaCTV = (TextView)findViewById(R.id.fechaCompleta);
 
-        if(dia.equals("dia1"))
-            fechaCompuesta = "Lunes 25 de Agosto";
-        else if(dia.equals("dia2"))
-            fechaCompuesta = "Martes 25 de Agosto";
-        else if(dia.equals("dia3"))
-            fechaCompuesta = "Miercoles 27 de Agosto";
+        if(dia.equals("lunes"))
+            fechaCompuesta = "Lunes 29 de Agosto";
+        else if(dia.equals("martes"))
+            fechaCompuesta = "Martes 30 de Agosto";
+        else if(dia.equals("miercoles"))
+            fechaCompuesta = "Miercoles 31 de Agosto";
 
         fechaCTV.setText(fechaCompuesta);
 

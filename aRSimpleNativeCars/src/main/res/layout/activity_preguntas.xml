@@ -3,7 +3,8 @@
     android:id="@+id/activity_preguntas"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="@drawable/fondo">
 
     <TextView
         android:text="No hay información por el momento"
@@ -11,11 +12,11 @@
         android:layout_height="wrap_content"
         android:id="@+id/textPregunta"
         android:layout_marginTop="40dp"
-        android:textSize="36sp"
+        android:textSize="19sp"
         android:textStyle="normal|bold"
         android:textAlignment="center"
         android:textColor="#ec7f30"
-        android:layout_marginBottom="60dp"
+        android:layout_marginBottom="50dp"
         android:layout_marginLeft="15dp"
         android:layout_marginRight="15dp" />
 

@@ -10,12 +10,11 @@
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_above="@+id/btnContunuar">
+        android:layout_height="match_parent">
 
         <ImageView
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="506dp"
             android:id="@+id/imgInstru"
             android:src="@drawable/hojauno"
             android:scaleType="fitXY" />

@@ -3,9 +3,8 @@ package com.devworms.pepsicorally;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
-import android.widget.Button;
+import android.widget.Toast;
 
 public class agendaActivity extends Activity {
 
@@ -17,18 +16,26 @@ public class agendaActivity extends Activity {
         }
 
 
-    public void agendaActScreen(View view){
-        Log.d("RestApi","D"+((Button)view).getId());
-        Intent newScreen = new Intent(agendaActivity.this, menuActActivity.class);
+    public void agendaLunes(View view){
+        Toast.makeText(this, "Cargando, por favor espere...", Toast.LENGTH_LONG).show();
+        Intent newScreen = new Intent(this, menuActActivity.class);
+        newScreen.putExtra("dia","lunes");
+        startActivity(newScreen);
 
-        if(((Button)view).getId()== Integer.parseInt("2131558512")){
-            newScreen.putExtra("dia","dia1");
-        }else if (((Button)view).getId()== Integer.parseInt("2131558513")){
-            newScreen.putExtra("dia","dia2");
-        }else{
-            newScreen.putExtra("dia","dia3");
-        }
+    }
 
+    public void agendaMartes(View view){
+        Toast.makeText(this, "Cargando, por favor espere...", Toast.LENGTH_LONG).show();
+        Intent newScreen = new Intent(this, menuActActivity.class);
+        newScreen.putExtra("dia","martes");
+        startActivity(newScreen);
+
+    }
+
+    public void agendaMiercoles(View view){
+        Toast.makeText(this, "Cargando, por favor espere...", Toast.LENGTH_LONG).show();
+        Intent newScreen = new Intent(this, menuActActivity.class);
+        newScreen.putExtra("dia","miercoles");
         startActivity(newScreen);
 
     }

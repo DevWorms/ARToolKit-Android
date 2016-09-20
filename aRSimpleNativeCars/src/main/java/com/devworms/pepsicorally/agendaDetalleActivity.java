@@ -27,13 +27,13 @@ public class agendaDetalleActivity extends Activity {
         TextView codigoTV = (TextView)findViewById(R.id.recom);
 
         if(fecha.equals("lunes")){
-            fechaCompuesta = "Lunes 22 de Agosto ";
+            fechaCompuesta = "Lunes 29 de Agosto ";
         dia="dia1";}
         else if(fecha.equals("martes")){
-            fechaCompuesta = "Martes 23 de Agosto ";
+            fechaCompuesta = "Martes 30 de Agosto ";
         dia="dia2";}
         else if(fecha.equals("miercoles")){
-            fechaCompuesta = "Miercoles 24 de Agosto ";
+            fechaCompuesta = "Miercoles 31 de Agosto ";
         dia="dia3";}
 
         fechaCTV.setText(fechaCompuesta);

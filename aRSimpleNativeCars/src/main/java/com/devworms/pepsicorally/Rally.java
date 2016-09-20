@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
@@ -109,6 +110,24 @@ public class Rally extends Activity {
     }
 
     public void reload() {
+
+        String[] list = new String[16];
+
+        list = ApiRest.consultarCodes(misPrefs);
+
+        SharedPreferences.Editor editor = misPrefs.edit();
+
+        for (int i = 1; i <= (list.length-1); i++){
+            if(list[i].equals("1")) {
+                editor.putBoolean(""+i+"", false);
+            } else {
+                editor.putBoolean(""+i+"", true);
+            }
+            Log.i("mmm: ","numeroteeee: "+i);
+        }
+
+        editor.commit();
+
         btn1.setEnabled(misPrefs.getBoolean("1", true));
         btn2.setEnabled(misPrefs.getBoolean("2", true));
         btn3.setEnabled(misPrefs.getBoolean("3", true));

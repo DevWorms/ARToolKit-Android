@@ -1,6 +1,7 @@
 package com.devworms.pepsicorally;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -19,6 +20,7 @@ public class PistasActivas extends Activity {
     String fondoUrl;
     RelativeLayout relativeLayout;
     Bitmap bitmap;
+    private ProgressDialog pDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +44,11 @@ public class PistasActivas extends Activity {
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
+            pDialog = new ProgressDialog(PistasActivas.this);
+            pDialog.setMessage("Cargando...");
+            pDialog.setIndeterminate(false);
+            pDialog.setCancelable(false);
+            pDialog.show();
 
         }
         protected Bitmap doInBackground(String... args) {
@@ -59,6 +66,7 @@ public class PistasActivas extends Activity {
             if(image != null){
                 //img.setImageBitmap(image);
                 relativeLayout.setBackgroundDrawable(new BitmapDrawable(getResources(),image));
+                pDialog.dismiss();
             }else{
 
                 Toast.makeText(PistasActivas.this, "Regresa y vuelve a entrar a esta pantalla para darte las pistas", Toast.LENGTH_SHORT).show();

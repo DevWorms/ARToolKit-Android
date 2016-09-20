@@ -130,10 +130,15 @@ public class RallyCode extends Activity {
             // Building Parameters
             OkHttpClient client = new OkHttpClient();
 
+            String php = botonStr;
+            if (botonStr.equals("1")){
+                php = "";
+            }
+
             MediaType mediaType = MediaType.parse("application/x-www-form-urlencoded");
-            RequestBody body = RequestBody.create(mediaType, "correo=" + "V" ); //--> cache mail
+            RequestBody body = RequestBody.create(mediaType, "correo=" + misPrefs.getString("email", "") ); //--> cache mail
             Request request = new Request.Builder()
-                    .url("http://app-pepsico.palindromo.com.mx/APP/respuesta"+botonStr+".php")
+                    .url("http://app-pepsico.palindromo.com.mx/APP/respuestas"+php+".php")
                     .post(body)
                     .build();
 
