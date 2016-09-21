@@ -64,13 +64,13 @@ public class ApiRest {
 
     public static String[] consultarPreguntas(String pregunta) {
 
-        String[] strings = new String[] { "", "", "", "", "", "" };
+        String[] strings = new String[] { "", "", "", "", "", "", "", "" };
 
         try {
             Log.d("RestApi","respuesta  consulta");
 
             Request request = new Request.Builder()
-                    .url("https://event-ar.herokuapp.com/api/v1/questions/"+pregunta)
+                    .url("https://event-ar.herokuapp.com/api/v1/questions/0129cfff-1686-478e-a67e-853c4e856c9e"+pregunta)
                     .get()
                     .build();
 
@@ -81,23 +81,25 @@ public class ApiRest {
 
                 JSONObject sensorApi = values.getJSONObject(0);
 
-                Log.d("RestApi","id "+sensorApi.getString("id"));
                 strings[0] = sensorApi.getString("id");
 
                 Log.d("RestApi","question "+sensorApi.getString("question"));
-                strings[1] = sensorApi.getString("pregunta");
+                strings[1] = sensorApi.getString("question");
 
-                Log.d("RestApi","respuesta "+sensorApi.getString("r1"));
-                strings[2] = sensorApi.getString("r1");
+                JSONArray valuesIn = new JSONArray(sensorApi.getString("answer_set"));
 
-                Log.d("RestApi","respuesta "+sensorApi.getString("r2"));
-                strings[3] = sensorApi.getString("r2");
+                //Log.d("RestApi","respuesta "+sensorApi.getString("r1"));
+                strings[2] = valuesIn.getJSONObject(0).getString("answer");
 
-                Log.d("RestApi","respuesta "+sensorApi.getString("r3"));
-                strings[4] = sensorApi.getString("r3");
+                //Log.d("RestApi","respuesta "+sensorApi.getString("r2"));
+                strings[3] = valuesIn.getJSONObject(1).getString("answer");
 
-                Log.d("RestApi","respuesta "+sensorApi.getString("respuesta_android"));
-                strings[5] = sensorApi.getString("respuesta_android");
+                //Log.d("RestApi","respuesta "+sensorApi.getString("r3"));
+                strings[4] = valuesIn.getJSONObject(2).getString("answer");
+
+                strings[5] = valuesIn.getJSONObject(0).getString("is_correct");//valor de resp1
+                strings[6] = valuesIn.getJSONObject(1).getString("is_correct");//valor de resp2
+                strings[7] = valuesIn.getJSONObject(2).getString("is_correct");//valor de resp3
             }
         }
         catch (Exception ex){

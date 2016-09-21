@@ -27,7 +27,9 @@ public class PreguntasActivity extends Activity {
 
         botonStr = getIntent().getStringExtra("boton");
 
-        list = ApiRest.consultarPreguntas(botonStr);
+
+        // --- TODO logica de botones por código
+        list = ApiRest.consultarPreguntas("");
 
         if(!list[1].equals("") ){
             textView.setText(list[1]);
@@ -48,9 +50,9 @@ public class PreguntasActivity extends Activity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 //String  itemValue    = (String) listView.getItemAtPosition(position);
-                if(     position == 0 && list[5].equals("1") ||
-                        position == 1 && list[5].equals("2") ||
-                        position == 2 && list[5].equals("3") ){
+                if(     position == 0 && list[5].equals("true") ||
+                        position == 1 && list[6].equals("true") ||
+                        position == 2 && list[7].equals("true") ){
                     rallyCode();
                 } else {
                     Toast.makeText(getApplicationContext(), "Respuesta incorrecta", Toast.LENGTH_SHORT).show();
