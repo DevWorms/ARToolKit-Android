@@ -55,6 +55,7 @@ package com.devworms.pepsicorally;
 
 import android.app.Activity;
 import android.app.Application;
+import android.content.Context;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 
@@ -64,16 +65,25 @@ public class ARSimpleNativeCarsApplication extends Application {
 
     private static Application sInstance;
 
+    private static Context mContext;
+
+    public static Context getContext() {
+        return mContext;
+    }
+
     // Anywhere in the application where an instance is required, this method
     // can be used to retrieve it.
     public static Application getInstance() {
         return sInstance;
     }
 
+
+
     @Override
     public void onCreate() {
         super.onCreate();
         sInstance = this;
+        mContext = getApplicationContext();
         ((ARSimpleNativeCarsApplication) sInstance).initializeInstance();
 
         registerActivityLifecycleCallbacks(new ActivityLifecycleCallbacks() {

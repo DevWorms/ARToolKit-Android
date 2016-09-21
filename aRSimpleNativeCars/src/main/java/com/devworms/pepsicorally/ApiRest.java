@@ -1,6 +1,7 @@
 package com.devworms.pepsicorally;
 
 
+import android.app.ProgressDialog;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.util.Log;
@@ -69,7 +70,7 @@ public class ApiRest {
             Log.d("RestApi","respuesta  consulta");
 
             Request request = new Request.Builder()
-                    .url("http://app-pepsico.palindromo.com.mx/APP/pregunta"+pregunta+".php")
+                    .url("https://event-ar.herokuapp.com/api/v1/questions/"+pregunta)
                     .get()
                     .build();
 
@@ -80,10 +81,10 @@ public class ApiRest {
 
                 JSONObject sensorApi = values.getJSONObject(0);
 
-                Log.d("RestApi","respuesta "+sensorApi.getString("id"));
+                Log.d("RestApi","id "+sensorApi.getString("id"));
                 strings[0] = sensorApi.getString("id");
 
-                Log.d("RestApi","respuesta "+sensorApi.getString("pregunta"));
+                Log.d("RestApi","question "+sensorApi.getString("question"));
                 strings[1] = sensorApi.getString("pregunta");
 
                 Log.d("RestApi","respuesta "+sensorApi.getString("r1"));
@@ -214,8 +215,57 @@ public class ApiRest {
         return strings;
     }
 
+    public static String Login(String mailStr, String passStr) {
+
+        String strings = "";
+
+        try {
+            Log.d("RestApi","respuesta  Login");
+
+            MediaType mediaType = MediaType.parse("application/x-www-form-urlencoded");
+            RequestBody body = RequestBody.create(mediaType, "username=" + mailStr + "&password=" + passStr + "&grant_type=password");
+            Request request = new Request.Builder()
+                    .url("https://event-ar.herokuapp.com/o/token/")
+                    .addHeader("Authorization","Basic eXozS2FQaVNseEpSTXdqaHFseXpJZDJybVV6eG9jQ2N0QkdOWEdCczpXRWdEbE9yZzhraDBtaXJteXhnYjZkNGNKM2xiS21ZWFJZNWxnVFB3N2lENG5qTzBmUEdsWndHcDRha2lGejRvMFVtaEpPaWFCcXdXd3pUeFJvaWJyNzZtTWVscG5rSXQ4dWtFdTJ3dk5lR21kUERCYXhxajNURGN5RTBWclpONg==")
+                    .post(body)
+                    .build();
+
+            JSONArray values = new RequestApi().execute(request).get();
+            Log.d("RestApi","respuesta login cuantos "+ values.length());
+
+            if( values.length() > 0 ) {
+
+
+
+                JSONObject sensorApi = values.getJSONObject(0);
+
+                Log.d("RestApi","respuesta acce "+sensorApi.getString("access_token"));
+                strings = sensorApi.getString("access_token");
+
+            }
+        }
+        catch (Exception ex){
+            Log.d("RestApi","no hay nada por el mometo");
+            strings = "No se encontró el usuario";
+        }
+
+        return strings;
+    }
+
     private static class RequestApi extends AsyncTask<Request, Void, JSONArray> {
+
+        ProgressDialog pDialog;
+
         @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            pDialog = new ProgressDialog(ARSimpleNativeCarsApplication.getContext());
+            pDialog.setMessage("Ingresando...");
+            pDialog.setIndeterminate(false);
+            pDialog.setCancelable(false);
+            //pDialog.show();
+        }
+
         protected JSONArray doInBackground(Request... params) {
             try {
 
@@ -223,7 +273,9 @@ public class ApiRest {
                 Response response = client.newCall(params[0]).execute();
 
                 String string = response.body().string();
-                JSONArray jsonObjects = new JSONArray(string);
+                JSONArray jsonObjects = new JSONArray("["+string+"]");
+
+                Log.d("se pasan", "doInBackground: "+jsonObjects);
 
                 return jsonObjects;
             } catch (Exception e) {
@@ -231,6 +283,12 @@ public class ApiRest {
                 return null;
             }
 
+        }
+
+        @Override
+        protected void onPostExecute(JSONArray jsonArray) {
+            super.onPostExecute(jsonArray);
+            //pDialog.dismiss();
         }
     }
 
