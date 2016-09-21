@@ -5,7 +5,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
@@ -115,6 +114,7 @@ public class Rally extends Activity {
 
         list = ApiRest.consultarCodes(misPrefs);
 
+        // --- TODO logica de achievements desbloqueados
         SharedPreferences.Editor editor = misPrefs.edit();
 
         for (int i = 1; i <= (list.length-1); i++){
@@ -123,7 +123,6 @@ public class Rally extends Activity {
             } else {
                 editor.putBoolean(""+i+"", true);
             }
-            Log.i("mmm: ","numeroteeee: "+i);
         }
 
         editor.commit();

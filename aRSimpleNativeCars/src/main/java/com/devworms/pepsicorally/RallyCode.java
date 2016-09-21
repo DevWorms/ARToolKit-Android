@@ -5,21 +5,12 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
-
-import java.io.IOException;
-
-import okhttp3.MediaType;
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.RequestBody;
-import okhttp3.Response;
 
 public class RallyCode extends Activity {
 
@@ -99,7 +90,10 @@ public class RallyCode extends Activity {
                 (botonStr.equals("13") && editTextCode.getText().toString().equals("9228")) ||
                 (botonStr.equals("14") && editTextCode.getText().toString().equals("7354")) ||
                 (botonStr.equals("15") && editTextCode.getText().toString().equals("5194")) ) {
-            new PostCode().execute();
+
+            // --- TODO logica para codigo de achievement
+            doCodeHere(editTextCode.getText().toString(), "9d7f40ac-2c4d-4d5c-a0e9-32f3deb910fa");
+
         } else {
             Toast toast = Toast.makeText(getApplicationContext(), "Código incorrecto", Toast.LENGTH_SHORT);
             toast.show();
@@ -107,64 +101,17 @@ public class RallyCode extends Activity {
 
     }
 
-    class PostCode extends AsyncTask<String, String, String> {
+    public void doCodeHere(String code, String achiev){
 
+        String text = ApiRest.doCode(code, achiev, misPrefs);
 
-        /**
-         * Before starting background thread Show Progress Dialog
-         * */
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-            pDialog = new ProgressDialog(RallyCode.this);
-            pDialog.setMessage("Validando...");
-            pDialog.setIndeterminate(false);
-            pDialog.setCancelable(false);
-            pDialog.show();
-        }
+        Log.d("mmmm.. ",text);
 
-        /**
-         * getting Albums JSON
-         * */
-        protected String doInBackground(String... args) {
-            // Building Parameters
-            OkHttpClient client = new OkHttpClient();
+        if(text.equals("Código incorrecto") || text.equals("false"))  {
+            Toast toast = Toast.makeText(getApplicationContext(), "Código incorrecto", Toast.LENGTH_SHORT);
+            toast.show();
 
-            String php = botonStr;
-            if (botonStr.equals("1")){
-                php = "";
-            }
-
-            MediaType mediaType = MediaType.parse("application/x-www-form-urlencoded");
-            RequestBody body = RequestBody.create(mediaType, "correo=" + misPrefs.getString("email", "") ); //--> cache mail
-            Request request = new Request.Builder()
-                    .url("http://app-pepsico.palindromo.com.mx/APP/respuestas"+php+".php")
-                    .post(body)
-                    .build();
-
-            try {
-                Response response = client.newCall(request).execute();
-
-                /*if (response.isSuccessful()){
-                    Intent registrarScreen = new Intent(RallyCode.this, RegistroExito.class);
-                    startActivity(registrarScreen);
-                }*/
-
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-
-            return null;
-        }
-
-        /**
-         * After completing background task Dismiss the progress dialog
-         * **/
-        protected void onPostExecute(String file_url) {
-            // dismiss the dialog after getting all albums
-
-            pDialog.dismiss();
-
+        } else {
             SharedPreferences.Editor editor = misPrefs.edit();
             editor.putBoolean(botonStr, false);
             editor.commit();
@@ -175,6 +122,5 @@ public class RallyCode extends Activity {
 
             finish();
         }
-
     }
 }

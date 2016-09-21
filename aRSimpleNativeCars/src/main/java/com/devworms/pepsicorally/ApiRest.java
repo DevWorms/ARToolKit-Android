@@ -237,8 +237,6 @@ public class ApiRest {
 
             if( values.length() > 0 ) {
 
-
-
                 JSONObject sensorApi = values.getJSONObject(0);
 
                 Log.d("RestApi","respuesta acce "+sensorApi.getString("access_token"));
@@ -249,6 +247,41 @@ public class ApiRest {
         catch (Exception ex){
             Log.d("RestApi","no hay nada por el mometo");
             strings = "No se encontró el usuario";
+        }
+
+        return strings;
+    }
+
+    public static String doCode(String code, String achievement, SharedPreferences misPrefs) {
+
+        String strings = "";
+
+        try {
+            Log.d("RestApi","respuesta  code");
+
+            MediaType mediaType = MediaType.parse("application/x-www-form-urlencoded");
+            RequestBody body = RequestBody.create(mediaType, "code=" + code + "&achievement=" + achievement );
+            Request request = new Request.Builder()
+                    .url("https://event-ar.herokuapp.com/api/v1/achievements/add/")
+                    .addHeader("Authorization","Bearer "+ misPrefs.getString("email", ""))
+                    .post(body)
+                    .build();
+
+            JSONArray values = new RequestApi().execute(request).get();
+            Log.d("RestApi","respuesta code cuantos "+ values.length());
+
+            if( values.length() > 0 ) {
+
+                JSONObject sensorApi = values.getJSONObject(0);
+
+                Log.d("RestApi","respuesta acce "+sensorApi.getString("success"));
+                strings = sensorApi.getString("success");
+
+            }
+        }
+        catch (Exception ex){
+            Log.d("RestApi","no hay nada por el mometo");
+            strings = "Código incorrecto";
         }
 
         return strings;
