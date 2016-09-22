@@ -51,16 +51,4 @@ public class menuPojo {
     public void setCodigo(String codigo) {
         this.codigo = codigo;
     }
-
-    public String getRecomendaciones() {
-        return recomendaciones;
-    }
-
-    public String getFecha() {
-        return fecha;
-    }
-
-    public void setFecha(String fecha) {
-        this.fecha = fecha;
-    }
 }

@@ -21,7 +21,7 @@ import okhttp3.Response;
 
 public class ApiRest {
 
-    public static String[] consultarListadoDias(int obj){
+    public static String[] consultarListadoDias(int obj) {
         String[] strings = new String[] { "", "", "" };
 
         try {
@@ -37,27 +37,23 @@ public class ApiRest {
             if( value.length() > 0 ) {
 
                 JSONArray valuesIn = new JSONArray(value.getString("results"));
-                Log.d("RestApi","respuesta results dias "+ valuesIn.length());
 
-                if( value.length() > 0 ) {
-                    Log.d("RestApi","respuesta dias "+ valuesIn);
+                if( valuesIn.length() > 0 ) {
+                    Log.d("RestApi","respuesta dias "+ valuesIn.getJSONObject(obj));
 
                     strings[0] = valuesIn.getJSONObject(obj).getString("id");
+                    Log.d("RestApi","respuesta dias id "+  valuesIn.getJSONObject(obj).getString("id"));
                     strings[1] = valuesIn.getJSONObject(obj).getString("name");
                     strings[2] = valuesIn.getJSONObject(obj).getString("date");
                 }
-
-
             }
         }
         catch (Exception ex){
-            Log.d("RestApi","no hay nada por el mometo");
+            Log.d("RestApi","no hay nada por el mometo listado dias");
         }
 
         return strings;
     }
-
-
 
     public static List<menuPojo> consultarListadoMenu(String dia) {
 
@@ -67,37 +63,182 @@ public class ApiRest {
             Log.d("RestApi","respuesta  consulta");
 
             Request request = new Request.Builder()
-                    .url("http://app-ecodsa.com.mx/daimler/"+dia+".php")
+                    .url("https://event-ar.herokuapp.com/api/v1/activities/?day="+dia)
                     .get()
                     .build();
-            JSONObject sensorApi = new RequestApi().execute(request).get();
-            Log.d("RestApi","respuesta "+ sensorApi.length());
-            for (int i = 0; i < sensorApi.length(); i++) {
 
-                //JSONObject sensorApi = values.getJSONObject(i);
-                menuPojo menPojo = new menuPojo();
-                Log.d("RestApi","respuesta "+sensorApi.getString("id"));
-                menPojo.setId(sensorApi.getString("id"));
-                Log.d("RestApi","respuesta "+sensorApi.getString("nombre"));
-                menPojo.setNombre(sensorApi.getString("nombre"));
-                Log.d("RestApi","respuesta "+sensorApi.getString("salon"));
-                menPojo.setSalon(sensorApi.getString("salon"));
-                Log.d("RestApi","respuesta "+sensorApi.getString("horario"));
-                menPojo.setHorario(sensorApi.getString("horario"));
-                Log.d("RestApi","respuesta "+sensorApi.getString("codigo"));
-                menPojo.setCodigo(sensorApi.getString("codigo"));
-                Log.d("RestApi","respuesta "+sensorApi.getString("img"));
-               // menPojo.setRecomendaciones(sensorApi.getString("img"));
-                Log.d("RestApi","respuesta "+sensorApi.getString("dia"));
-                menPojo.setFecha(sensorApi.getString("dia"));
-                lMenu.add(menPojo);
+            JSONObject value = new RequestApi().execute(request).get();
+
+            if( value.length() > 0 ) {
+
+                Log.d("RestApi","respuesta listado actividades "+ value.length());
+
+                JSONArray sensorApi = new JSONArray(value.getString("results"));
+
+                if( sensorApi.length() > 0 ) {
+                    for (int i = 0; i < sensorApi.length(); i++) {
+
+                        menuPojo menPojo = new menuPojo();
+                        Log.d("RestApi","respuesta "+sensorApi.getJSONObject(i).getString("id"));
+                        menPojo.setId(sensorApi.getJSONObject(i).getString("id"));
+                        Log.d("RestApi","respuesta "+sensorApi.getJSONObject(i).getString("name"));
+                        menPojo.setNombre(sensorApi.getJSONObject(i).getString("name"));
+                        Log.d("RestApi","respuesta "+sensorApi.getJSONObject(i).getString("place"));
+                        menPojo.setSalon(sensorApi.getJSONObject(i).getString("place"));
+                        Log.d("RestApi","respuesta "+sensorApi.getJSONObject(i).getString("start")+"-"+sensorApi.getJSONObject(i).getString("end"));
+                        menPojo.setHorario(sensorApi.getJSONObject(i).getString("start")+" - "+sensorApi.getJSONObject(i).getString("end"));
+                        Log.d("RestApi","respuesta "+sensorApi.getJSONObject(i).getString("recomendations"));
+                        menPojo.setCodigo(sensorApi.getJSONObject(i).getString("recomendations"));
+                        lMenu.add(menPojo);
+                    }
+                }
             }
         }
         catch (Exception ex){
-
+            Log.d("RestApi","no hay nada por el mometo listado actividades");
         }
 
         return lMenu;
+    }
+
+    public static String consultarPista() {
+
+        String strings = "";
+
+        try {
+            Log.d("RestApi","respuesta  consulta");
+
+            Request request = new Request.Builder()
+                    .url("https://event-ar.herokuapp.com/api/v1/achievements/?event=e451ca62-86dc-4e88-bf54-20c9b476f60e&clue_is_active=True")
+                    .get()
+                    .build();
+
+            JSONObject value = new RequestApi().execute(request).get();
+
+            if( value.length() > 0 ) {
+
+                JSONArray valuesIn = new JSONArray(value.getString("results"));
+
+                if( valuesIn.length() > 0 ) {
+                    Log.d("RestApi","respuesta clue "+ valuesIn.getJSONObject(0));
+
+                    strings = valuesIn.getJSONObject(0).getString("clue_img");
+                }
+            }
+        }
+        catch (Exception ex){
+            Log.d("RestApi","no hay nada por el mometo pistas");
+        }
+
+        return strings;
+    }
+
+    public static String[] consultarPreguntas(String pregunta) {
+
+        String[] strings = new String[] { "", "", "", "", "", "", "", "" };
+
+        try {
+            Log.d("RestApi","respuesta  consulta");
+
+            Request request = new Request.Builder()
+                    .url("https://event-ar.herokuapp.com/api/v1/questions/0129cfff-1686-478e-a67e-853c4e856c9e"+pregunta)
+                    .get()
+                    .build();
+
+            JSONObject value = new RequestApi().execute(request).get();
+
+            if( value.length() > 0 ) {
+
+                strings[0] = value.getString("id");
+
+                Log.d("RestApi","question "+value.getString("question"));
+                strings[1] = value.getString("question");
+
+                JSONArray valuesIn = new JSONArray(value.getString("answer_set"));
+
+                //Log.d("RestApi","respuesta "+sensorApi.getString("r1"));
+                strings[2] = valuesIn.getJSONObject(0).getString("answer");
+
+                //Log.d("RestApi","respuesta "+sensorApi.getString("r2"));
+                strings[3] = valuesIn.getJSONObject(1).getString("answer");
+
+                //Log.d("RestApi","respuesta "+sensorApi.getString("r3"));
+                strings[4] = valuesIn.getJSONObject(2).getString("answer");
+
+                strings[5] = valuesIn.getJSONObject(0).getString("is_correct");//valor de resp1
+                strings[6] = valuesIn.getJSONObject(1).getString("is_correct");//valor de resp2
+                strings[7] = valuesIn.getJSONObject(2).getString("is_correct");//valor de resp3
+            }
+        }
+        catch (Exception ex){
+            Log.d("RestApi","no hay nada por el mometo preguntas");
+        }
+
+        return strings;
+    }
+
+    public static String Login(String mailStr, String passStr) {
+
+        String strings = "";
+
+        try {
+            Log.d("RestApi","respuesta  Login");
+
+            MediaType mediaType = MediaType.parse("application/x-www-form-urlencoded");
+            RequestBody body = RequestBody.create(mediaType, "username=" + mailStr + "&password=" + passStr + "&grant_type=password");
+            Request request = new Request.Builder()
+                    .url("https://event-ar.herokuapp.com/o/token/")
+                    .addHeader("Authorization","Basic eXozS2FQaVNseEpSTXdqaHFseXpJZDJybVV6eG9jQ2N0QkdOWEdCczpXRWdEbE9yZzhraDBtaXJteXhnYjZkNGNKM2xiS21ZWFJZNWxnVFB3N2lENG5qTzBmUEdsWndHcDRha2lGejRvMFVtaEpPaWFCcXdXd3pUeFJvaWJyNzZtTWVscG5rSXQ4dWtFdTJ3dk5lR21kUERCYXhxajNURGN5RTBWclpONg==")
+                    .post(body)
+                    .build();
+
+            JSONObject value = new RequestApi().execute(request).get();
+
+            if( value.length() > 0 ) {
+
+                Log.d("RestApi","respuesta acce "+value.getString("access_token"));
+                strings = value.getString("access_token");
+
+            }
+        }
+        catch (Exception ex){
+            Log.d("RestApi","no hay nada por el mometo login");
+            strings = "No se encontró el usuario";
+        }
+
+        return strings;
+    }
+
+    public static String doCode(String code, String achievement, SharedPreferences misPrefs) {
+
+        String strings = "";
+
+        try {
+            Log.d("RestApi","respuesta  code");
+
+            MediaType mediaType = MediaType.parse("application/x-www-form-urlencoded");
+            RequestBody body = RequestBody.create(mediaType, "code=" + code + "&achievement=" + achievement );
+            Request request = new Request.Builder()
+                    .url("https://event-ar.herokuapp.com/api/v1/achievements/add/")
+                    .addHeader("Authorization","Bearer "+ misPrefs.getString("email", ""))
+                    .post(body)
+                    .build();
+
+            JSONObject value = new RequestApi().execute(request).get();
+            Log.d("RestApi","respuesta "+ value.length());
+
+            if( value.length() > 0 ) {
+                Log.d("RestApi","respuesta code "+value.getString("success"));
+                strings = value.getString("success");
+
+            }
+        }
+        catch (Exception ex){
+            Log.d("RestApi","no hay nada por el mometo code");
+            strings = "Código incorrecto";
+        }
+
+        return strings;
     }
 
     public static String[] consultarCodes(SharedPreferences misPrefs) {
@@ -172,147 +313,6 @@ public class ApiRest {
         }
         catch (Exception ex){
             Log.d("RestApi","no hay nada por el mometo");
-        }
-
-        return strings;
-    }
-
-    public static String consultarPista() {
-
-        String strings = "";
-
-        try {
-            Log.d("RestApi","respuesta  consulta");
-
-            Request request = new Request.Builder()
-                    .url("http://app-pepsico.palindromo.com.mx/APP/pistas.php")
-                    .get()
-                    .build();
-
-            JSONObject values = new RequestApi().execute(request).get();
-            Log.d("RestApi","respuesta "+ values.length());
-
-            if( values.length() > 0 ) {
-
-                //JSONObject sensorApi = values.getJSONObject(0);
-
-                Log.d("RestApi","respuesta "+values.getString("img"));
-                strings = values.getString("img");
-
-            }
-        }
-        catch (Exception ex){
-            Log.d("RestApi","no hay nada por el mometo");
-        }
-
-        return strings;
-    }
-
-    public static String[] consultarPreguntas(String pregunta) {
-
-        String[] strings = new String[] { "", "", "", "", "", "", "", "" };
-
-        try {
-            Log.d("RestApi","respuesta  consulta");
-
-            Request request = new Request.Builder()
-                    .url("https://event-ar.herokuapp.com/api/v1/questions/0129cfff-1686-478e-a67e-853c4e856c9e"+pregunta)
-                    .get()
-                    .build();
-
-            JSONObject value = new RequestApi().execute(request).get();
-            Log.d("RestApi","respuesta "+ value.length());
-
-            if( value.length() > 0 ) {
-
-                strings[0] = value.getString("id");
-
-                Log.d("RestApi","question "+value.getString("question"));
-                strings[1] = value.getString("question");
-
-                JSONArray valuesIn = new JSONArray(value.getString("answer_set"));
-
-                //Log.d("RestApi","respuesta "+sensorApi.getString("r1"));
-                strings[2] = valuesIn.getJSONObject(0).getString("answer");
-
-                //Log.d("RestApi","respuesta "+sensorApi.getString("r2"));
-                strings[3] = valuesIn.getJSONObject(1).getString("answer");
-
-                //Log.d("RestApi","respuesta "+sensorApi.getString("r3"));
-                strings[4] = valuesIn.getJSONObject(2).getString("answer");
-
-                strings[5] = valuesIn.getJSONObject(0).getString("is_correct");//valor de resp1
-                strings[6] = valuesIn.getJSONObject(1).getString("is_correct");//valor de resp2
-                strings[7] = valuesIn.getJSONObject(2).getString("is_correct");//valor de resp3
-            }
-        }
-        catch (Exception ex){
-            Log.d("RestApi","no hay nada por el mometo");
-        }
-
-        return strings;
-    }
-
-    public static String Login(String mailStr, String passStr) {
-
-        String strings = "";
-
-        try {
-            Log.d("RestApi","respuesta  Login");
-
-            MediaType mediaType = MediaType.parse("application/x-www-form-urlencoded");
-            RequestBody body = RequestBody.create(mediaType, "username=" + mailStr + "&password=" + passStr + "&grant_type=password");
-            Request request = new Request.Builder()
-                    .url("https://event-ar.herokuapp.com/o/token/")
-                    .addHeader("Authorization","Basic eXozS2FQaVNseEpSTXdqaHFseXpJZDJybVV6eG9jQ2N0QkdOWEdCczpXRWdEbE9yZzhraDBtaXJteXhnYjZkNGNKM2xiS21ZWFJZNWxnVFB3N2lENG5qTzBmUEdsWndHcDRha2lGejRvMFVtaEpPaWFCcXdXd3pUeFJvaWJyNzZtTWVscG5rSXQ4dWtFdTJ3dk5lR21kUERCYXhxajNURGN5RTBWclpONg==")
-                    .post(body)
-                    .build();
-
-            JSONObject value = new RequestApi().execute(request).get();
-            Log.d("RestApi","respuesta "+ value.length());
-
-            if( value.length() > 0 ) {
-
-                Log.d("RestApi","respuesta acce "+value.getString("access_token"));
-                strings = value.getString("access_token");
-
-            }
-        }
-        catch (Exception ex){
-            Log.d("RestApi","no hay nada por el mometo");
-            strings = "No se encontró el usuario";
-        }
-
-        return strings;
-    }
-
-    public static String doCode(String code, String achievement, SharedPreferences misPrefs) {
-
-        String strings = "";
-
-        try {
-            Log.d("RestApi","respuesta  code");
-
-            MediaType mediaType = MediaType.parse("application/x-www-form-urlencoded");
-            RequestBody body = RequestBody.create(mediaType, "code=" + code + "&achievement=" + achievement );
-            Request request = new Request.Builder()
-                    .url("https://event-ar.herokuapp.com/api/v1/achievements/add/")
-                    .addHeader("Authorization","Bearer "+ misPrefs.getString("email", ""))
-                    .post(body)
-                    .build();
-
-            JSONObject value = new RequestApi().execute(request).get();
-            Log.d("RestApi","respuesta "+ value.length());
-
-            if( value.length() > 0 ) {
-                Log.d("RestApi","respuesta acce "+value.getString("success"));
-                strings = value.getString("success");
-
-            }
-        }
-        catch (Exception ex){
-            Log.d("RestApi","no hay nada por el mometo");
-            strings = "Código incorrecto";
         }
 
         return strings;

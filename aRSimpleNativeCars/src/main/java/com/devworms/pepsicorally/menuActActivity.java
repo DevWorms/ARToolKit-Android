@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -28,25 +27,27 @@ public class menuActActivity extends Activity {
         List<String> nombres = new ArrayList<String>();
         final ListView listview = (ListView) findViewById(R.id.listview);
 
-
         // consultar el jason
         String dia = getIntent().getStringExtra("dia");
+        String idDia = getIntent().getStringExtra("idDia");
 
-        Log.d("RestApi","respuesta "+dia);
-        list = ApiRest.consultarListadoMenu(dia);
 
         TextView fechaCTV = (TextView)findViewById(R.id.fechaCompleta);
 
-        if(dia.equals("lunes"))
-            fechaCompuesta = "Lunes 29 de Agosto";
-        else if(dia.equals("martes"))
-            fechaCompuesta = "Martes 30 de Agosto";
-        else if(dia.equals("miercoles"))
-            fechaCompuesta = "Miercoles 31 de Agosto";
+        if(dia.equals("Jueves"))
+            fechaCompuesta = dia+" 29 de Septiembre";
+        else if(dia.equals("Viernes"))
+            fechaCompuesta = dia+" 30 de Septiembre";
+        else if(dia.equals("Miercoles"))
+            fechaCompuesta = dia+" 28 de Septiembre";
 
         fechaCTV.setText(fechaCompuesta);
 
         //***********************
+
+        if (idDia.equals("")) return;
+
+        list = ApiRest.consultarListadoMenu(idDia);
 
 
         for (int i = 0; i< list.size(); i++){
@@ -71,8 +72,7 @@ public class menuActActivity extends Activity {
                 newScreen.putExtra("salon", list.get(position).getSalon());
                 newScreen.putExtra("horario", list.get(position).getHorario());
                 newScreen.putExtra("codigo", list.get(position).getCodigo());
-                newScreen.putExtra("recomendaciones", list.get(position).getRecomendaciones());
-                newScreen.putExtra("fecha", list.get(position).getFecha());
+                newScreen.putExtra("fecha", fechaCompuesta);
                 startActivity(newScreen);
 
             }
