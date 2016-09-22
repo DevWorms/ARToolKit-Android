@@ -75,17 +75,12 @@ public class SplashInicioActivity extends Activity {
 
     @Override
     protected void onPause() {
-        // TODO Auto-generated method stub
         super.onPause();
 
         // unregister notification receiver
         LocalBroadcastManager.getInstance(this).unregisterReceiver(notificationReceiver);
         finish();
     }
-
-
-
-
 
     @Override
     protected void onResume() {

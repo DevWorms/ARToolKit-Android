@@ -8,16 +8,20 @@ import android.widget.Toast;
 
 public class agendaActivity extends Activity {
 
-        @Override
-        protected void onCreate(Bundle savedInstanceState) {
-            super.onCreate(savedInstanceState);
-            setContentView(R.layout.activity_agenda);
+    private String[] list = new String[3];
 
-        }
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_agenda);
+    }
 
 
     public void agendaLunes(View view){
         Toast.makeText(this, "Cargando, por favor espere...", Toast.LENGTH_LONG).show();
+
+        list = ApiRest.consultarListadoDias(0);
+
         Intent newScreen = new Intent(this, menuActActivity.class);
         newScreen.putExtra("dia","lunes");
         startActivity(newScreen);

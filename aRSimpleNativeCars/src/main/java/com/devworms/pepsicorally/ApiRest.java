@@ -21,6 +21,44 @@ import okhttp3.Response;
 
 public class ApiRest {
 
+    public static String[] consultarListadoDias(int obj){
+        String[] strings = new String[] { "", "", "" };
+
+        try {
+            Log.d("RestApi","respuesta  consulta");
+
+            Request request = new Request.Builder()
+                    .url("https://event-ar.herokuapp.com/api/v1/days/?event=e451ca62-86dc-4e88-bf54-20c9b476f60e")
+                    .get()
+                    .build();
+
+            JSONObject value = new RequestApi().execute(request).get();
+
+            if( value.length() > 0 ) {
+
+                JSONArray valuesIn = new JSONArray(value.getString("results"));
+                Log.d("RestApi","respuesta results dias "+ valuesIn.length());
+
+                if( value.length() > 0 ) {
+                    Log.d("RestApi","respuesta dias "+ valuesIn);
+
+                    strings[0] = valuesIn.getJSONObject(obj).getString("id");
+                    strings[1] = valuesIn.getJSONObject(obj).getString("name");
+                    strings[2] = valuesIn.getJSONObject(obj).getString("date");
+                }
+
+
+            }
+        }
+        catch (Exception ex){
+            Log.d("RestApi","no hay nada por el mometo");
+        }
+
+        return strings;
+    }
+
+
+
     public static List<menuPojo> consultarListadoMenu(String dia) {
 
         List<menuPojo> lMenu = new ArrayList<menuPojo>();
@@ -32,11 +70,11 @@ public class ApiRest {
                     .url("http://app-ecodsa.com.mx/daimler/"+dia+".php")
                     .get()
                     .build();
-            JSONArray values = new RequestApi().execute(request).get();
-            Log.d("RestApi","respuesta "+ values.length());
-            for (int i = 0; i < values.length(); i++) {
+            JSONObject sensorApi = new RequestApi().execute(request).get();
+            Log.d("RestApi","respuesta "+ sensorApi.length());
+            for (int i = 0; i < sensorApi.length(); i++) {
 
-                JSONObject sensorApi = values.getJSONObject(i);
+                //JSONObject sensorApi = values.getJSONObject(i);
                 menuPojo menPojo = new menuPojo();
                 Log.d("RestApi","respuesta "+sensorApi.getString("id"));
                 menPojo.setId(sensorApi.getString("id"));
@@ -62,53 +100,6 @@ public class ApiRest {
         return lMenu;
     }
 
-    public static String[] consultarPreguntas(String pregunta) {
-
-        String[] strings = new String[] { "", "", "", "", "", "", "", "" };
-
-        try {
-            Log.d("RestApi","respuesta  consulta");
-
-            Request request = new Request.Builder()
-                    .url("https://event-ar.herokuapp.com/api/v1/questions/0129cfff-1686-478e-a67e-853c4e856c9e"+pregunta)
-                    .get()
-                    .build();
-
-            JSONArray values = new RequestApi().execute(request).get();
-            Log.d("RestApi","respuesta "+ values.length());
-
-            if( values.length() > 0 ) {
-
-                JSONObject sensorApi = values.getJSONObject(0);
-
-                strings[0] = sensorApi.getString("id");
-
-                Log.d("RestApi","question "+sensorApi.getString("question"));
-                strings[1] = sensorApi.getString("question");
-
-                JSONArray valuesIn = new JSONArray(sensorApi.getString("answer_set"));
-
-                //Log.d("RestApi","respuesta "+sensorApi.getString("r1"));
-                strings[2] = valuesIn.getJSONObject(0).getString("answer");
-
-                //Log.d("RestApi","respuesta "+sensorApi.getString("r2"));
-                strings[3] = valuesIn.getJSONObject(1).getString("answer");
-
-                //Log.d("RestApi","respuesta "+sensorApi.getString("r3"));
-                strings[4] = valuesIn.getJSONObject(2).getString("answer");
-
-                strings[5] = valuesIn.getJSONObject(0).getString("is_correct");//valor de resp1
-                strings[6] = valuesIn.getJSONObject(1).getString("is_correct");//valor de resp2
-                strings[7] = valuesIn.getJSONObject(2).getString("is_correct");//valor de resp3
-            }
-        }
-        catch (Exception ex){
-            Log.d("RestApi","no hay nada por el mometo");
-        }
-
-        return strings;
-    }
-
     public static String[] consultarCodes(SharedPreferences misPrefs) {
 
         String[] strings = new String[] { "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "" };
@@ -123,12 +114,12 @@ public class ApiRest {
                     .post(body)
                     .build();
 
-            JSONArray values = new RequestApi().execute(request).get();
-            Log.d("RestApi","respuesta "+ values.length());
+            JSONObject sensorApi = new RequestApi().execute(request).get();
+            Log.d("RestApi","respuesta "+ sensorApi.length());
 
-            if( values.length() > 0 ) {
+            if( sensorApi.length() > 0 ) {
 
-                JSONObject sensorApi = values.getJSONObject(0);
+                //JSONObject sensorApi = values.getJSONObject(0);
 
                 Log.d("RestApi","respuesta "+sensorApi.getString("correo"));
                 strings[0] = sensorApi.getString("correo");
@@ -198,16 +189,61 @@ public class ApiRest {
                     .get()
                     .build();
 
-            JSONArray values = new RequestApi().execute(request).get();
+            JSONObject values = new RequestApi().execute(request).get();
             Log.d("RestApi","respuesta "+ values.length());
 
             if( values.length() > 0 ) {
 
-                JSONObject sensorApi = values.getJSONObject(0);
+                //JSONObject sensorApi = values.getJSONObject(0);
 
-                Log.d("RestApi","respuesta "+sensorApi.getString("img"));
-                strings = sensorApi.getString("img");
+                Log.d("RestApi","respuesta "+values.getString("img"));
+                strings = values.getString("img");
 
+            }
+        }
+        catch (Exception ex){
+            Log.d("RestApi","no hay nada por el mometo");
+        }
+
+        return strings;
+    }
+
+    public static String[] consultarPreguntas(String pregunta) {
+
+        String[] strings = new String[] { "", "", "", "", "", "", "", "" };
+
+        try {
+            Log.d("RestApi","respuesta  consulta");
+
+            Request request = new Request.Builder()
+                    .url("https://event-ar.herokuapp.com/api/v1/questions/0129cfff-1686-478e-a67e-853c4e856c9e"+pregunta)
+                    .get()
+                    .build();
+
+            JSONObject value = new RequestApi().execute(request).get();
+            Log.d("RestApi","respuesta "+ value.length());
+
+            if( value.length() > 0 ) {
+
+                strings[0] = value.getString("id");
+
+                Log.d("RestApi","question "+value.getString("question"));
+                strings[1] = value.getString("question");
+
+                JSONArray valuesIn = new JSONArray(value.getString("answer_set"));
+
+                //Log.d("RestApi","respuesta "+sensorApi.getString("r1"));
+                strings[2] = valuesIn.getJSONObject(0).getString("answer");
+
+                //Log.d("RestApi","respuesta "+sensorApi.getString("r2"));
+                strings[3] = valuesIn.getJSONObject(1).getString("answer");
+
+                //Log.d("RestApi","respuesta "+sensorApi.getString("r3"));
+                strings[4] = valuesIn.getJSONObject(2).getString("answer");
+
+                strings[5] = valuesIn.getJSONObject(0).getString("is_correct");//valor de resp1
+                strings[6] = valuesIn.getJSONObject(1).getString("is_correct");//valor de resp2
+                strings[7] = valuesIn.getJSONObject(2).getString("is_correct");//valor de resp3
             }
         }
         catch (Exception ex){
@@ -232,15 +268,13 @@ public class ApiRest {
                     .post(body)
                     .build();
 
-            JSONArray values = new RequestApi().execute(request).get();
-            Log.d("RestApi","respuesta login cuantos "+ values.length());
+            JSONObject value = new RequestApi().execute(request).get();
+            Log.d("RestApi","respuesta "+ value.length());
 
-            if( values.length() > 0 ) {
+            if( value.length() > 0 ) {
 
-                JSONObject sensorApi = values.getJSONObject(0);
-
-                Log.d("RestApi","respuesta acce "+sensorApi.getString("access_token"));
-                strings = sensorApi.getString("access_token");
+                Log.d("RestApi","respuesta acce "+value.getString("access_token"));
+                strings = value.getString("access_token");
 
             }
         }
@@ -267,15 +301,12 @@ public class ApiRest {
                     .post(body)
                     .build();
 
-            JSONArray values = new RequestApi().execute(request).get();
-            Log.d("RestApi","respuesta code cuantos "+ values.length());
+            JSONObject value = new RequestApi().execute(request).get();
+            Log.d("RestApi","respuesta "+ value.length());
 
-            if( values.length() > 0 ) {
-
-                JSONObject sensorApi = values.getJSONObject(0);
-
-                Log.d("RestApi","respuesta acce "+sensorApi.getString("success"));
-                strings = sensorApi.getString("success");
+            if( value.length() > 0 ) {
+                Log.d("RestApi","respuesta acce "+value.getString("success"));
+                strings = value.getString("success");
 
             }
         }
@@ -287,7 +318,7 @@ public class ApiRest {
         return strings;
     }
 
-    private static class RequestApi extends AsyncTask<Request, Void, JSONArray> {
+    private static class RequestApi extends AsyncTask<Request, Void, JSONObject> {
 
         ProgressDialog pDialog;
 
@@ -301,18 +332,18 @@ public class ApiRest {
             //pDialog.show();
         }
 
-        protected JSONArray doInBackground(Request... params) {
+        protected JSONObject doInBackground(Request... params) {
             try {
 
                 OkHttpClient client = new OkHttpClient();
                 Response response = client.newCall(params[0]).execute();
 
                 String string = response.body().string();
-                JSONArray jsonObjects = new JSONArray("["+string+"]");
+                JSONObject jsonObject = new JSONObject(string);
 
-                Log.d("se pasan", "doInBackground: "+jsonObjects);
+                Log.d("se pasan", "doInBackground: "+jsonObject);
 
-                return jsonObjects;
+                return jsonObject;
             } catch (Exception e) {
                 e.printStackTrace();
                 return null;
@@ -321,8 +352,8 @@ public class ApiRest {
         }
 
         @Override
-        protected void onPostExecute(JSONArray jsonArray) {
-            super.onPostExecute(jsonArray);
+        protected void onPostExecute(JSONObject jsonObject) {
+            super.onPostExecute(jsonObject);
             //pDialog.dismiss();
         }
     }

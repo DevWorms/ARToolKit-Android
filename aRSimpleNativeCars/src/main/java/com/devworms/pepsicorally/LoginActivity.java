@@ -57,11 +57,6 @@ public class LoginActivity extends Activity {
 
     }
 
-    public void pantallaRegistro(View view) {
-        Intent llamarScreenCodigo = new Intent(this, MainActivity.class);
-        startActivity(llamarScreenCodigo);
-    }
-
     public void moduloLogin(View view){
 
         String mailStr = mail.getText().toString();
