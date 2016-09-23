@@ -133,7 +133,7 @@ public class ApiRest {
         return strings;
     }
 
-    public static String[] consultarPreguntas(String pregunta) {
+    public static String[] consultarPreguntas(String idAchiev) {
 
         String[] strings = new String[] { "", "", "", "", "", "", "", "" };
 
@@ -141,7 +141,7 @@ public class ApiRest {
             Log.d("RestApi","respuesta  consulta");
 
             Request request = new Request.Builder()
-                    .url("https://event-ar.herokuapp.com/api/v1/questions/0129cfff-1686-478e-a67e-853c4e856c9e"+pregunta)
+                    .url("https://event-ar.herokuapp.com/api/v1/questions/")
                     .get()
                     .build();
 
@@ -149,25 +149,42 @@ public class ApiRest {
 
             if( value.length() > 0 ) {
 
-                strings[0] = value.getString("id");
+                JSONArray values = new JSONArray(value.getString("results"));
 
-                Log.d("RestApi","question "+value.getString("question"));
-                strings[1] = value.getString("question");
+                if( values.length() > 0 ) {
 
-                JSONArray valuesIn = new JSONArray(value.getString("answer_set"));
+                    for (int i = 0; i < values.length(); i++) {
 
-                //Log.d("RestApi","respuesta "+sensorApi.getString("r1"));
-                strings[2] = valuesIn.getJSONObject(0).getString("answer");
+                        if (values.getJSONObject(i).getString("achievement").equals( idAchiev )) {
 
-                //Log.d("RestApi","respuesta "+sensorApi.getString("r2"));
-                strings[3] = valuesIn.getJSONObject(1).getString("answer");
+                            strings[0] = values.getJSONObject(i).getString("id");
 
-                //Log.d("RestApi","respuesta "+sensorApi.getString("r3"));
-                strings[4] = valuesIn.getJSONObject(2).getString("answer");
+                            Log.d("RestApi","question "+values.getJSONObject(i).getString("question"));
+                            strings[1] = values.getJSONObject(i).getString("question");
 
-                strings[5] = valuesIn.getJSONObject(0).getString("is_correct");//valor de resp1
-                strings[6] = valuesIn.getJSONObject(1).getString("is_correct");//valor de resp2
-                strings[7] = valuesIn.getJSONObject(2).getString("is_correct");//valor de resp3
+                            JSONArray valuesIn = new JSONArray(values.getJSONObject(i).getString("answer_set"));
+
+                            //Log.d("RestApi","respuesta "+sensorApi.getString("r1"));
+                            strings[2] = valuesIn.getJSONObject(0).getString("answer");
+
+                            //Log.d("RestApi","respuesta "+sensorApi.getString("r2"));
+                            strings[3] = valuesIn.getJSONObject(1).getString("answer");
+
+                            //Log.d("RestApi","respuesta "+sensorApi.getString("r3"));
+                            strings[4] = valuesIn.getJSONObject(2).getString("answer");
+
+                            strings[5] = valuesIn.getJSONObject(0).getString("is_correct");//valor de resp1
+                            strings[6] = valuesIn.getJSONObject(1).getString("is_correct");//valor de resp2
+                            strings[7] = valuesIn.getJSONObject(2).getString("is_correct");//valor de resp3
+                        }
+                    }
+                }
+
+
+
+
+
+
             }
         }
         catch (Exception ex){
@@ -241,90 +258,99 @@ public class ApiRest {
         return strings;
     }
 
-    public static String[] consultarCodes(SharedPreferences misPrefs) {
+    public static List<achievPojo> consultarAchievs() {
 
-        String[] strings = new String[] { "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "" };
+        List<achievPojo> achievs = new ArrayList<>();
 
         try {
-            Log.d("RestApi","respuesta  consulta preguntas");
+            Log.d("RestApi","respuesta achievs");
 
-            MediaType mediaType = MediaType.parse("application/x-www-form-urlencoded");
-            RequestBody body = RequestBody.create(mediaType, "correo=" + misPrefs.getString("email", "") ); //--> cache mail
             Request request = new Request.Builder()
-                    .url("http://app-pepsico.palindromo.com.mx/APP/trofeos.php")
-                    .post(body)
+                    .url("https://event-ar.herokuapp.com/api/v1/achievements/?event=e451ca62-86dc-4e88-bf54-20c9b476f60e")
+                    .get()
                     .build();
 
-            JSONObject sensorApi = new RequestApi().execute(request).get();
-            Log.d("RestApi","respuesta "+ sensorApi.length());
+            JSONObject value = new RequestApi().execute(request).get();
 
-            if( sensorApi.length() > 0 ) {
+            if( value.length() > 0 ) {
 
-                //JSONObject sensorApi = values.getJSONObject(0);
+                JSONArray sensorApi = new JSONArray(value.getString("results"));
 
-                Log.d("RestApi","respuesta "+sensorApi.getString("correo"));
-                strings[0] = sensorApi.getString("correo");
+                if( sensorApi.length() > 0 ) {
+                    for (int i = 0; i < sensorApi.length(); i++) {
 
-                Log.d("RestApi","respuesta "+sensorApi.getString("pista_1"));
-                strings[1] = sensorApi.getString("pista_1");
+                        achievPojo achievPojo = new achievPojo();
 
-                Log.d("RestApi","respuesta "+sensorApi.getString("pista_2"));
-                strings[2] = sensorApi.getString("pista_2");
+                        achievPojo.setId(sensorApi.getJSONObject( i ).getString("id"));
+                        achievPojo.setCode_img(sensorApi.getJSONObject( i ).getString("code_img"));
+                        achievPojo.setNombre(sensorApi.getJSONObject( i ).getString("name"));
+                        achievPojo.setOff_img(sensorApi.getJSONObject( i ).getString("off_img"));
+                        achievPojo.setOn_img(sensorApi.getJSONObject( i ).getString("on_img"));
 
-                Log.d("RestApi","respuesta "+sensorApi.getString("pista_3"));
-                strings[3] = sensorApi.getString("pista_3");
+                        achievs.add(achievPojo);
+                    }
+                }
 
-                Log.d("RestApi","respuesta "+sensorApi.getString("pista_4"));
-                strings[4] = sensorApi.getString("pista_4");
 
-                Log.d("RestApi","respuesta "+sensorApi.getString("pista_5"));
-                strings[5] = sensorApi.getString("pista_5");
-
-                Log.d("RestApi","respuesta "+sensorApi.getString("pista_6"));
-                strings[6] = sensorApi.getString("pista_6");
-
-                Log.d("RestApi","respuesta "+sensorApi.getString("pista_7"));
-                strings[7] = sensorApi.getString("pista_7");
-
-                Log.d("RestApi","respuesta "+sensorApi.getString("pista_8"));
-                strings[8] = sensorApi.getString("pista_8");
-
-                Log.d("RestApi","respuesta "+sensorApi.getString("pista_9"));
-                strings[9] = sensorApi.getString("pista_9");
-
-                Log.d("RestApi","respuesta "+sensorApi.getString("pista_10"));
-                strings[10] = sensorApi.getString("pista_10");
-
-                Log.d("RestApi","respuesta "+sensorApi.getString("pista_11"));
-                strings[11] = sensorApi.getString("pista_11");
-
-                Log.d("RestApi","respuesta "+sensorApi.getString("pista_12"));
-                strings[12] = sensorApi.getString("pista_12");
-
-                Log.d("RestApi","respuesta "+sensorApi.getString("pista_13"));
-                strings[13] = sensorApi.getString("pista_13");
-
-                Log.d("RestApi","respuesta "+sensorApi.getString("pista_14"));
-                strings[14] = sensorApi.getString("pista_14");
-
-                Log.d("RestApi","respuesta "+sensorApi.getString("pista_15"));
-                strings[15] = sensorApi.getString("pista_15");
             }
         }
         catch (Exception ex){
-            Log.d("RestApi","no hay nada por el mometo");
+            Log.d("RestApi","no hay nada por el mometo achievs");
         }
 
-        return strings;
+        return achievs;
+    }
+
+    public static List<String> consultarAchievsMe(SharedPreferences misPrefs) {
+
+        List<String> achievs = new ArrayList<>();
+
+        try {
+            Log.d("RestApi","respuesta achievs me");
+            Log.d("RestApi","respuesta achievs me"+ misPrefs.getString("email", ""));
+
+            Request request = new Request.Builder()
+                    .url("https://event-ar.herokuapp.com/api/v1/users/me/")
+                    .addHeader("Authorization","Bearer "+ misPrefs.getString("email", ""))
+                    .get()
+                    .build();
+
+            JSONObject value = new RequestApi().execute(request).get();
+
+            if( value.length() > 0 ) {
+
+                JSONArray sensorApi = new JSONArray(value.getString("achievements"));
+
+                if( sensorApi.length() > 0 ) {
+
+                    Log.d("RestApi","respuesta  consulta me " + sensorApi.length());
+
+                    for (int i = 0; i < sensorApi.length(); i++) {
+                        achievs.add(sensorApi.getString(0));
+                    }
+                }
+            }
+        }
+        catch (Exception ex){
+            Log.d("RestApi","no hay nada por el mometo achievs me");
+        }
+
+        return achievs;
     }
 
     private static class RequestApi extends AsyncTask<Request, Void, JSONObject> {
 
         ProgressDialog pDialog;
 
+        /*private Context mContext;
+        public RequestApi (Context context){
+            mContext = context;
+        }*/
+
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
+
             pDialog = new ProgressDialog(ARSimpleNativeCarsApplication.getContext());
             pDialog.setMessage("Ingresando...");
             pDialog.setIndeterminate(false);
@@ -333,6 +359,7 @@ public class ApiRest {
         }
 
         protected JSONObject doInBackground(Request... params) {
+
             try {
 
                 OkHttpClient client = new OkHttpClient();
@@ -354,7 +381,9 @@ public class ApiRest {
         @Override
         protected void onPostExecute(JSONObject jsonObject) {
             super.onPostExecute(jsonObject);
-            //pDialog.dismiss();
+             if (pDialog != null){
+                 pDialog.dismiss();
+             }
         }
     }
 

@@ -1,12 +1,24 @@
 package com.devworms.pepsicorally;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
+
+import java.io.InputStream;
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Rally extends Activity {
 
@@ -14,6 +26,9 @@ public class Rally extends Activity {
     SharedPreferences misPrefs;
     int MI_RESULT = 100;
     private Button btn1, btn2, btn3, btn4, btn5, btn6, btn7, btn8, btn9, btn10, btn11, btn12, btn13, btn14, btn15;
+    private List<Button> buttonList = new ArrayList<>();
+    List<achievPojo> listAchievs;
+    List<String> listAchievsMe;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,200 +53,124 @@ public class Rally extends Activity {
         btn14 = (Button)findViewById(R.id.catorce);
         btn15 = (Button)findViewById(R.id.quince);
 
+        buttonList.add(btn1);
+        buttonList.add(btn2);
+        buttonList.add(btn3);
+        buttonList.add(btn4);
+        buttonList.add(btn5);
+        buttonList.add(btn6);
+        buttonList.add(btn7);
+        buttonList.add(btn8);
+        buttonList.add(btn9);
+        buttonList.add(btn10);
+        buttonList.add(btn11);
+        buttonList.add(btn12);
+        buttonList.add(btn13);
+        buttonList.add(btn14);
+        buttonList.add(btn15);
+
         reload();
     }
 
-    public void code(String botonStr){
+    public void code(String botonStr, String idAchiev){
         Intent i = new Intent(this, PreguntasActivity.class);
         i.putExtra("boton", botonStr);
+        i.putExtra("idAchiev", idAchiev);
         //para que te regrese de la actividad RallyCode
         startActivityForResult(i, MI_RESULT);
     }
 
     public void pistaUno(View v){
-        code("1");
+        code(listAchievs.get(0).getCode_img(), listAchievs.get(0).getId());
     }
 
     public void pistaDos(View v){
-        code("2");
+        code(listAchievs.get(1).getCode_img(), listAchievs.get(1).getId());
     }
 
     public void pistaTres(View v){
-        code("3");
+        code(listAchievs.get(2).getCode_img(), listAchievs.get(2).getId());
     }
 
     public void pistaCuatro(View v){
-        code("4");
+        code(listAchievs.get(3).getCode_img(), listAchievs.get(3).getId());
     }
 
     public void pistaCinco(View v){
-        code("5");
+        code(listAchievs.get(4).getCode_img(), listAchievs.get(4).getId());
     }
 
     public void pistaSeis(View v){
-        code("6");
+        code(listAchievs.get(5).getCode_img(), listAchievs.get(5).getId());
     }
 
     public void pistaSiete(View v){
-        code("7");
+        code(listAchievs.get(6).getCode_img(), listAchievs.get(6).getId());
     }
 
     public void pistaOcho(View v){
-        code("8");
+        code(listAchievs.get(7).getCode_img(), listAchievs.get(7).getId());
     }
 
     public void pistaNueve(View v){
-        code("9");
+        code(listAchievs.get(8).getCode_img(), listAchievs.get(8).getId());
     }
 
     public void pistaDiez(View v){
-        code("10");
+        code(listAchievs.get(9).getCode_img(), listAchievs.get(9).getId());
     }
 
     public void pistaOnce(View v){
-        code("11");
+        code(listAchievs.get(10).getCode_img(), listAchievs.get(10).getId());
     }
 
     public void pistaDoce(View v){
-        code("12");
+        code(listAchievs.get(11).getCode_img(), listAchievs.get(11).getId());
     }
 
     public void pistaTrece(View v){
-        code("13");
+        code(listAchievs.get(12).getCode_img(), listAchievs.get(12).getId());
     }
 
     public void pistaCatorce(View v){
-        code("14");
+        code(listAchievs.get(13).getCode_img(), listAchievs.get(13).getId());
     }
 
     public void pistaQuince(View v){
-        code("15");
+        code(listAchievs.get(14).getCode_img(), listAchievs.get(14).getId());
     }
 
     public void reload() {
 
-        String[] list = new String[16];
+        listAchievs = ApiRest.consultarAchievs();
+        listAchievsMe = ApiRest.consultarAchievsMe(misPrefs);
 
-        list = ApiRest.consultarCodes(misPrefs);
+        String imgUrl;
 
-        // --- TODO logica de achievements desbloqueados
-        SharedPreferences.Editor editor = misPrefs.edit();
+        if ( listAchievsMe.size() > 0 ){
+            for (int i = 0; i< listAchievs.size(); i++){
+                for (int iMe = 0; iMe< listAchievsMe.size(); iMe++){
 
-        for (int i = 1; i <= (list.length-1); i++){
-            if(list[i].equals("1")) {
-                editor.putBoolean(""+i+"", false);
-            } else {
-                editor.putBoolean(""+i+"", true);
+                    if (listAchievsMe.get(iMe).equals( listAchievs.get(i).getId() )) {
+                        Log.d("Iteracion", "numero de boton " + i);
+
+                        imgUrl = listAchievs.get(i).getOn_img();
+                        buttonList.get(i).setEnabled(false);
+                    } else {
+                        imgUrl = listAchievs.get(i).getOff_img();
+                    }
+
+                    new LoadImage(buttonList.get(i)).execute( imgUrl );
+                }
+            }
+        } else {
+            for (int i = 0; i< listAchievs.size(); i++){
+
+                imgUrl = listAchievs.get(i).getOff_img();
+                new LoadImage(buttonList.get(i)).execute( imgUrl );
             }
         }
 
-        editor.commit();
-
-        btn1.setEnabled(misPrefs.getBoolean("1", true));
-        btn2.setEnabled(misPrefs.getBoolean("2", true));
-        btn3.setEnabled(misPrefs.getBoolean("3", true));
-        btn4.setEnabled(misPrefs.getBoolean("4", true));
-        btn5.setEnabled(misPrefs.getBoolean("5", true));
-        btn6.setEnabled(misPrefs.getBoolean("6", true));
-        btn7.setEnabled(misPrefs.getBoolean("7", true));
-        btn8.setEnabled(misPrefs.getBoolean("8", true));
-        btn9.setEnabled(misPrefs.getBoolean("9", true));
-        btn10.setEnabled(misPrefs.getBoolean("10", true));
-        btn11.setEnabled(misPrefs.getBoolean("11", true));
-        btn12.setEnabled(misPrefs.getBoolean("12", true));
-        btn13.setEnabled(misPrefs.getBoolean("13", true));
-        btn14.setEnabled(misPrefs.getBoolean("14", true));
-        btn15.setEnabled(misPrefs.getBoolean("15", true));
-
-        if( misPrefs.getBoolean("1", true) ){
-            btn1.setBackgroundResource(R.drawable.btn1b);
-        } else{
-            btn1.setBackgroundResource(R.drawable.btn1);
-        }
-
-        if( misPrefs.getBoolean("2", true) ){
-            btn2.setBackgroundResource(R.drawable.btn2b);
-        } else{
-            btn2.setBackgroundResource(R.drawable.btn2);
-        }
-
-        if( misPrefs.getBoolean("3", true) ){
-            btn3.setBackgroundResource(R.drawable.btn3b);
-        } else{
-            btn3.setBackgroundResource(R.drawable.btn3);
-        }
-
-        if( misPrefs.getBoolean("4", true) ){
-            btn4.setBackgroundResource(R.drawable.btn4b);
-        } else{
-            btn4.setBackgroundResource(R.drawable.btn4);
-        }
-
-        if( misPrefs.getBoolean("5", true) ){
-            btn5.setBackgroundResource(R.drawable.btn5b);
-        } else{
-            btn5.setBackgroundResource(R.drawable.btn5);
-        }
-
-        if( misPrefs.getBoolean("6", true) ){
-            btn6.setBackgroundResource(R.drawable.btn6b);
-        } else{
-            btn6.setBackgroundResource(R.drawable.btn6);
-        }
-
-        if( misPrefs.getBoolean("7", true) ){
-            btn7.setBackgroundResource(R.drawable.btn7b);
-        } else{
-            btn7.setBackgroundResource(R.drawable.btn7);
-        }
-
-        if( misPrefs.getBoolean("8", true) ){
-            btn8.setBackgroundResource(R.drawable.btn8b);
-        } else{
-            btn8.setBackgroundResource(R.drawable.btn8);
-        }
-
-        if( misPrefs.getBoolean("9", true) ){
-            btn9.setBackgroundResource(R.drawable.btn9b);
-        } else{
-            btn9.setBackgroundResource(R.drawable.btn9);
-        }
-
-        if( misPrefs.getBoolean("10", true) ){
-            btn10.setBackgroundResource(R.drawable.btn10b);
-        } else{
-            btn10.setBackgroundResource(R.drawable.btn10);
-        }
-
-        if( misPrefs.getBoolean("11", true) ){
-            btn11.setBackgroundResource(R.drawable.btn11b);
-        } else{
-            btn11.setBackgroundResource(R.drawable.btn11);
-        }
-
-        if( misPrefs.getBoolean("12", true) ){
-            btn12.setBackgroundResource(R.drawable.btn12b);
-        } else{
-            btn12.setBackgroundResource(R.drawable.btn12);
-        }
-
-        if( misPrefs.getBoolean("13", true) ){
-            btn13.setBackgroundResource(R.drawable.btn13b);
-        } else{
-            btn13.setBackgroundResource(R.drawable.btn13);
-        }
-
-        if( misPrefs.getBoolean("14", true) ){
-            btn14.setBackgroundResource(R.drawable.btn14b);
-        } else{
-            btn14.setBackgroundResource(R.drawable.btn14);
-        }
-
-        if( misPrefs.getBoolean("15", true) ){
-            btn15.setBackgroundResource(R.drawable.btn15b);
-        } else{
-            btn15.setBackgroundResource(R.drawable.btn15);
-        }
     }
 
     //para que te regrese de la actividad RallyCode
@@ -241,6 +180,51 @@ public class Rally extends Activity {
 
         if (requestCode == MI_RESULT){
             reload();
+        }
+    }
+
+
+    private class LoadImage extends AsyncTask<String, Void, Bitmap> {
+
+        ProgressDialog pDialog;
+        Bitmap bitmap;
+
+        Button mBtn;
+        public LoadImage(Button btn){
+            mBtn = btn;
+        }
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            pDialog = new ProgressDialog(Rally.this);
+            pDialog.setMessage("Cargando...");
+            pDialog.setIndeterminate(false);
+            pDialog.setCancelable(false);
+            pDialog.show();
+
+        }
+
+        protected Bitmap doInBackground(String... args) {
+            try {
+                bitmap = BitmapFactory.decodeStream((InputStream)new URL(args[0]).getContent());
+                return bitmap;
+            } catch (Exception e) {
+                e.printStackTrace();
+                return null;
+            }
+
+        }
+
+        protected void onPostExecute(Bitmap image) {
+
+            pDialog.dismiss();
+
+            if(image == null){
+                Toast.makeText(Rally.this, "Regresa y vuelve a entrar a esta pantalla", Toast.LENGTH_SHORT).show();
+            } else {
+                mBtn.setBackgroundDrawable(new BitmapDrawable(getResources(),image));
+            }
         }
     }
 }

@@ -63,10 +63,12 @@ public class PistasActivas extends Activity {
 
         protected void onPostExecute(Bitmap image) {
 
+            pDialog.dismiss();
+
             if(image != null){
                 //img.setImageBitmap(image);
                 relativeLayout.setBackgroundDrawable(new BitmapDrawable(getResources(),image));
-                pDialog.dismiss();
+
             }else{
 
                 Toast.makeText(PistasActivas.this, "Regresa y vuelve a entrar a esta pantalla para darte las pistas", Toast.LENGTH_SHORT).show();

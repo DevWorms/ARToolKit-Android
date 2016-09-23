@@ -27,9 +27,7 @@ public class PreguntasActivity extends Activity {
 
         botonStr = getIntent().getStringExtra("boton");
 
-
-        // --- TODO logica de botones por código
-        list = ApiRest.consultarPreguntas("");
+        list = ApiRest.consultarPreguntas( getIntent().getStringExtra("idAchiev") );
 
         if(!list[1].equals("") ){
             textView.setText(list[1]);
@@ -65,6 +63,7 @@ public class PreguntasActivity extends Activity {
     public void rallyCode(){
         Intent i = new Intent(this, RallyCode.class);
         i.putExtra("boton", botonStr);
+        i.putExtra("idAchiev", getIntent().getStringExtra("idAchiev"));
         //para que te regrese de la actividad RallyCode
         startActivity(i);
         finish();

@@ -35,7 +35,6 @@
                     android:layout_height="95dp"
                     android:id="@+id/uno"
                     android:textColor="#a5a7a6"
-                    android:background="@drawable/fotografias"
                     android:onClick="pistaUno"/>
 
                 <Button
@@ -44,7 +43,6 @@
                     android:id="@+id/dos"
                     android:textColor="#a5a7a6"
                     android:layout_marginLeft="15dp"
-                    android:background="@drawable/fotografias"
                     android:onClick="pistaDos" />
 
                 <Button
@@ -53,7 +51,6 @@
                     android:id="@+id/tres"
                     android:textColor="#a5a7a6"
                     android:layout_marginLeft="15dp"
-                    android:background="@drawable/fotografias"
                     android:onClick="pistaTres" />
 
             </LinearLayout>
@@ -69,7 +66,6 @@
                     android:layout_height="95dp"
                     android:id="@+id/cuatro"
                     android:textColor="#a5a7a6"
-                    android:background="@drawable/fotografias"
                     android:onClick="pistaCuatro" />
 
                 <Button
@@ -78,7 +74,6 @@
                     android:id="@+id/cinco"
                     android:textColor="#a5a7a6"
                     android:layout_marginLeft="15dp"
-                    android:background="@drawable/fotografias"
                     android:onClick="pistaCinco" />
 
                 <Button
@@ -87,7 +82,6 @@
                     android:id="@+id/seis"
                     android:textColor="#a5a7a6"
                     android:layout_marginLeft="15dp"
-                    android:background="@drawable/fotografias"
                     android:onClick="pistaSeis" />
             </LinearLayout>
 
@@ -102,7 +96,6 @@
                     android:layout_height="95dp"
                     android:id="@+id/siete"
                     android:textColor="#a5a7a6"
-                    android:background="@drawable/fotografias"
                     android:onClick="pistaSiete" />
 
                 <Button
@@ -111,7 +104,6 @@
                     android:id="@+id/ocho"
                     android:textColor="#a5a7a6"
                     android:layout_marginLeft="15dp"
-                    android:background="@drawable/fotografias"
                     android:onClick="pistaOcho" />
 
                 <Button
@@ -120,7 +112,6 @@
                     android:id="@+id/nueve"
                     android:textColor="#a5a7a6"
                     android:layout_marginLeft="15dp"
-                    android:background="@drawable/fotografias"
                     android:onClick="pistaNueve" />
 
             </LinearLayout>
@@ -136,7 +127,6 @@
                     android:layout_height="95dp"
                     android:id="@+id/diez"
                     android:textColor="#a5a7a6"
-                    android:background="@drawable/fotografias"
                     android:onClick="pistaDiez" />
 
                 <Button
@@ -145,7 +135,6 @@
                     android:id="@+id/once"
                     android:textColor="#a5a7a6"
                     android:layout_marginLeft="15dp"
-                    android:background="@drawable/fotografias"
                     android:onClick="pistaOnce" />
 
                 <Button
@@ -154,7 +143,6 @@
                     android:id="@+id/doce"
                     android:textColor="#a5a7a6"
                     android:layout_marginLeft="15dp"
-                    android:background="@drawable/fotografias"
                     android:onClick="pistaDoce" />
 
             </LinearLayout>
@@ -170,7 +158,6 @@
                     android:layout_height="95dp"
                     android:id="@+id/trece"
                     android:textColor="#a5a7a6"
-                    android:background="@drawable/fotografias"
                     android:onClick="pistaTrece" />
 
                 <Button
@@ -179,7 +166,6 @@
                     android:id="@+id/catorce"
                     android:textColor="#a5a7a6"
                     android:layout_marginLeft="15dp"
-                    android:background="@drawable/fotografias"
                     android:onClick="pistaCatorce" />
 
                 <Button
@@ -188,7 +174,6 @@
                     android:id="@+id/quince"
                     android:textColor="#a5a7a6"
                     android:layout_marginLeft="15dp"
-                    android:background="@drawable/fotografias"
                     android:onClick="pistaQuince" />
 
             </LinearLayout>

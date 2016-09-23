@@ -9,8 +9,6 @@ public class menuPojo {
     public String salon;
     public String horario;
     public String codigo;
-    public String recomendaciones;
-    public String fecha;
 
     public String getId() {
         return id;

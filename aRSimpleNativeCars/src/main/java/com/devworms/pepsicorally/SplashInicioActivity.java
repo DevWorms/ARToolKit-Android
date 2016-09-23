@@ -55,17 +55,17 @@ public class SplashInicioActivity extends Activity {
 
                     boolean acceso = misPrefs.getBoolean("acceso", false); // segundo parametro es el que toma default
 
-                    if(acceso)
-                    {
-                        Intent intent = new Intent(SplashInicioActivity.this,MenuPepsico.class);
-                        startActivity(intent);
-                        finish();
-                    } else {
+                    //if(acceso)
+                    //{
+                    //    Intent intent = new Intent(SplashInicioActivity.this,MenuPepsico.class);
+                    //    startActivity(intent);
+                    //    finish();
+                    //} else {
 
                         Intent intent = new Intent(SplashInicioActivity.this, LoginActivity.class);
                         startActivity(intent);
                         finish();
-                    }
+                    //}
 
                 }
             }
