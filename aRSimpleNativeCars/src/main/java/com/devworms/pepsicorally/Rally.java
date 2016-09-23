@@ -147,30 +147,23 @@ public class Rally extends Activity {
 
         String imgUrl;
 
-        if ( listAchievsMe.size() > 0 ){
-            for (int i = 0; i< listAchievs.size(); i++){
-                for (int iMe = 0; iMe< listAchievsMe.size(); iMe++){
+        for (int i = 0; i< listAchievs.size(); i++){
 
-                    if (listAchievsMe.get(iMe).equals( listAchievs.get(i).getId() )) {
-                        Log.d("Iteracion", "numero de boton " + i);
+            imgUrl = listAchievs.get(i).getOff_img();
 
-                        imgUrl = listAchievs.get(i).getOn_img();
-                        buttonList.get(i).setEnabled(false);
-                    } else {
-                        imgUrl = listAchievs.get(i).getOff_img();
-                    }
+            for (int iMe = 0; iMe< listAchievsMe.size(); iMe++){
 
-                    new LoadImage(buttonList.get(i)).execute( imgUrl );
+                if (listAchievsMe.get(iMe).equals( listAchievs.get(i).getId() )) {
+                    Log.d("Iteracion", "numero de boton " + i + " mas: " + listAchievsMe.get(iMe));
+
+                    imgUrl = listAchievs.get(i).getOn_img();
+                    buttonList.get(i).setEnabled(false);
                 }
             }
-        } else {
-            for (int i = 0; i< listAchievs.size(); i++){
 
-                imgUrl = listAchievs.get(i).getOff_img();
-                new LoadImage(buttonList.get(i)).execute( imgUrl );
-            }
+            new LoadImage(buttonList.get(i)).execute( imgUrl );
+
         }
-
     }
 
     //para que te regrese de la actividad RallyCode

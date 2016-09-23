@@ -357,7 +357,7 @@ public class ApiRest {
                     Log.d("RestApi","respuesta  consulta me " + sensorApi.length());
 
                     for (int i = 0; i < sensorApi.length(); i++) {
-                        achievs.add(sensorApi.getString(0));
+                        achievs.add(sensorApi.getString(i));
                     }
                 }
             }
