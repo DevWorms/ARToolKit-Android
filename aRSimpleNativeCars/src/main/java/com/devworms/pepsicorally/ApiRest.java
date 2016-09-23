@@ -226,6 +226,37 @@ public class ApiRest {
         return strings;
     }
 
+    public static String registro(String name, String mailStr, String passStr) {
+
+        String strings = "";
+
+        try {
+            Log.d("RestApi","respuesta Registro");
+
+            MediaType mediaType = MediaType.parse("application/x-www-form-urlencoded");
+            RequestBody body = RequestBody.create(mediaType, "first_name=" + name + "&email=" + mailStr + "&password=" + passStr + "&events=e451ca62-86dc-4e88-bf54-20c9b476f60e");
+            Request request = new Request.Builder()
+                    .url("https://event-ar.herokuapp.com/api/v1/users/")
+                    .post(body)
+                    .build();
+
+            JSONObject value = new RequestApi().execute(request).get();
+
+            if( value.length() > 0 ) {
+
+                Log.d("RestApi","respuesta registro "+value.getString("first_name"));
+                strings = "Bienvenido/a "+value.getString("first_name");
+
+            }
+        }
+        catch (Exception ex){
+            Log.d("RestApi","no hay nada por el mometo registro");
+            strings = "No se pudo registrar usuario";
+        }
+
+        return strings;
+    }
+
     public static String doCode(String code, String achievement, SharedPreferences misPrefs) {
 
         String strings = "";

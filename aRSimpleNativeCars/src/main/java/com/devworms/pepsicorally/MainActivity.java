@@ -8,7 +8,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
@@ -19,15 +18,8 @@ import android.widget.Toast;
 import com.devworms.pepsicorally.mobile.AWSMobileClient;
 import com.devworms.pepsicorally.mobile.user.IdentityManager;
 
-import java.io.IOException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
-import okhttp3.MediaType;
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.RequestBody;
-import okhttp3.Response;
 
 
 public class MainActivity extends Activity {
@@ -94,7 +86,24 @@ public class MainActivity extends Activity {
         } else {
             if( validateEmail(email) ){
                 if (pass.equals(rePass)) {
-                    new LoadAlbums().execute();
+
+                    String string = ApiRest.registro( (nombreString+" "+patString+" "+matString),email,pass );
+
+                    if (!string.equals("No se pudo registrar usuario")) {
+                        SharedPreferences.Editor editor = misPrefs.edit();
+                        editor.putString("email", email);
+                        //editor.putBoolean("acceso", true);
+                        editor.commit();
+
+                        Intent registrarScreen = new Intent(this, RegistroExito.class);
+                        startActivity(registrarScreen);
+
+                        new LoadAlbums();
+                    } else {
+                        Toast.makeText(this, string, Toast.LENGTH_SHORT).show();
+                    }
+
+
                 } else {
                     Context context = getApplicationContext();
                     CharSequence text = "Las contraseñas no coinciden";
@@ -119,73 +128,6 @@ public class MainActivity extends Activity {
         Matcher matcher = pattern.matcher(email);
         return matcher.matches();
     }
-
-   class LoadAlbums extends AsyncTask<String, String, String> {
-
-        String nombreStr = nombre.getText().toString();
-        String patStr = paterno.getText().toString();
-        String matStr = materno.getText().toString();
-        String mailStr = mail.getText().toString();
-        String passStr = contrasena.getText().toString();
-
-        /**
-         * Before starting background thread Show Progress Dialog
-         * */
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-            pDialog = new ProgressDialog(MainActivity.this);
-            pDialog.setMessage("Registrando...");
-            pDialog.setIndeterminate(false);
-            pDialog.setCancelable(false);
-            pDialog.show();
-        }
-
-        /**
-         * getting Albums JSON
-         * */
-        protected String doInBackground(String... args) {
-            // Building Parameters
-            OkHttpClient client = new OkHttpClient();
-
-            MediaType mediaType = MediaType.parse("application/x-www-form-urlencoded");
-            RequestBody body = RequestBody.create(mediaType, "nombre=" + nombreStr + "&paterno=" + patStr + "&materno=" + matStr +
-                    "&correo=" + mailStr + "&passw=" + passStr);
-            Request request = new Request.Builder()
-                    .url("http://app-pepsico.palindromo.com.mx/APP/registro.php")
-                    .post(body)
-                    .build();
-
-            try {
-                Response response = client.newCall(request).execute();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-
-            return null;
-        }
-
-        /**
-         * After completing background task Dismiss the progress dialog
-         * **/
-        protected void onPostExecute(String file_url) {
-            // dismiss the dialog after getting all albums
-
-            pDialog.dismiss();
-
-            SharedPreferences.Editor editor = misPrefs.edit();
-            editor.putString("email", mailStr);
-            editor.putBoolean("acceso", true);
-            editor.commit();
-
-            Intent registrarScreen = new Intent(MainActivity.this, RegistroExito.class);
-            startActivity(registrarScreen);
-
-            finishAffinity();
-        }
-
-    }
-
 
 
     @Override
@@ -222,5 +164,16 @@ public class MainActivity extends Activity {
 
         // unregister notification receiver
         LocalBroadcastManager.getInstance(this).unregisterReceiver(notificationReceiver);
+    }
+
+
+    class LoadAlbums  {
+
+        LoadAlbums(){
+
+            Log.d("clase mamona", "elimina todo atras.");
+
+            finishAffinity();
+        }
     }
 }
