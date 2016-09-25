@@ -9,7 +9,7 @@ model {
             applicationId = "com.devworms.pepsicorally"
             minSdkVersion.apiLevel = 15
             targetSdkVersion.apiLevel = 22
-            versionCode = 1
+            versionCode = 3
 
             multiDexEnabled = true
 
