@@ -28,15 +28,6 @@
                 <Button
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/lunesBtn"
-                    android:background="@drawable/botonl"
-                    android:textColor="#ffffff"
-                    android:onClick="agendaLunes"
-                     />
-
-                <Button
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
                     android:id="@+id/martesBtn"
                     android:layout_marginTop="25dp"
                     android:background="@drawable/botonma"
